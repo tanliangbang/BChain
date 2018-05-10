@@ -1,0 +1,7 @@
+/build/
+/config/
+/dist/
+/src/utils/md5.js
+/src/plugins/UE
+/*.js
+/test/unit/coverage/
