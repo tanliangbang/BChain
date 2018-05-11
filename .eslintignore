@@ -2,6 +2,6 @@
 /config/
 /dist/
 /src/utils/md5.js
-/src/plugins/UE
+/static/greetest/gt.js
 /*.js
 /test/unit/coverage/

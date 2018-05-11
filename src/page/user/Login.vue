@@ -3,15 +3,17 @@
       <div>
             <p>注册一账通</p>
             <div class="nomalInput">
-              <input placeholder="输入手机号码" type="text"/>
+              <input v-model="loginForm.phone" placeholder="输入手机号码"/>
+<!--
               <i class="error_promit">手机号码错误</i>
+-->
             </div>
             <div class="nomalInput">
-              <input placeholder="输入密码" :type="isShowpass?'password':'text'"/>
-              <i v-on:click="showpass()" class="showpass"></i>
+              <input v-model="loginForm.password" placeholder="输入密码" :type="isShowpass?'text':'password'"/>
+              <i v-on:click="showpass()" :class="isShowpass?'showpass':'hidepass'"></i>
             </div>
             <div class="button">
-              <a>登入</a>
+              <a v-on:click="login">登入</a>
             </div>
             <div class="forgetPassword">
                <router-link to="forget">忘记密码</router-link>
@@ -24,13 +26,24 @@
 </template>
 
 <script>
+import '../../../static/greetest/gt.js'
 export default {
   name: 'Login',
   components: {
   },
   data () {
     return {
-      isShowpass: true
+      isShowpass: false,
+      loginForm: {
+        phone: '',
+        password: ''
+      },
+      rules: {
+        phone: {
+          message: '',
+          class: 'none'
+        }
+      }
     }
   },
   created () {
@@ -40,6 +53,9 @@ export default {
   methods: {
     showpass () {
       this.isShowpass = !this.isShowpass
+    },
+    login () {
+
     }
   }
 }
