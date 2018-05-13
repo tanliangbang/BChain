@@ -1,8 +1,9 @@
 <template>
-  <section class="regist">
+  <section class="foundPassword">
       <div v-bind:style="{minHeight: this.$store.getters.getMinHeight}">
-          <form class="step1" v-if="step === 1" v-on:keyup="onPageDown">
-             <p>注册一账通</p>
+        <div class="nav_found"><a class="select">手机找回密码</a><a>邮箱找回密码</a></div>
+
+        <form class="phone_found" v-if="step === 1" v-on:keyup="onPageDown">
              <div class="nomalInput">
                <input placeholder="输入手机号码"  v-model="registForm.phone" v-on:focus="showDel('phone')" v-on:blur="checkPhone()" type="text"/>
                <i :class="rules.phone.class" v-on:click="delContent('phone')" >{{rules.phone.message}}</i>
@@ -22,14 +23,12 @@
                <i :class="rules.repassword.class"  v-on:click="delContent('repassword')">{{rules.repassword.message}}</i>
                <i v-on:click="showpass()" :class="isShowpass?'showpass':'hidepass'"></i>
              </div>
-             <div class="nomalInput">
-               <input placeholder="推荐人" type="text"/>
-             </div>
+
              <div v-if="!ispass" class="rbutton">
-               <a class="no_button">下一步</a>
+               <a class="no_button">确认</a>
              </div>
             <div v-if="ispass" class="rbutton">
-              <a v-on:click="submit"  class="ok_button">下一步</a>
+              <a v-on:click="submit"  class="ok_button">确认</a>
             </div>
           </form>
           <form class="step2" v-if="step === 2" v-on:keyup="emailPassDown">
@@ -51,27 +50,15 @@
               <router-link class="ok_button" to="login">登入比链</router-link>
             </div>
           </form>
-          <form class="step3" v-if="step === 3">
-            <p>
-              恭喜,注册成功~ <br/>
-              恭交易操作需要完成邮箱验证,请完成邮箱验证
-            </p>
-            <p>已发送 648103576@qq.com </p>
-            <div  class="to_button">
-              <a href="mailto:648103576@qq.com" class="ok_button">登入邮箱</a>
-            </div>
-            <div class="login_button">
-              <router-link class="ok_button" to="login">登入比链</router-link>
-            </div>
-          </form>
       </div>
+
   </section>
 </template>
 
 <script>
 import Tool from '../../utils/Tool'
 export default {
-  name: 'Regist',
+  name: 'FoundPassword',
   components: {
   },
   data () {
@@ -85,8 +72,7 @@ export default {
         phone: '',
         code: '',
         password: '',
-        repassword: '',
-        recommed: ''
+        repassword: ''
       },
       rules: {
         phone: {
@@ -114,7 +100,6 @@ export default {
   },
   created () {
     window.scrollTo(0, 0)
-    console.log(this)
   },
   methods: {
     showDel (field) {
@@ -256,18 +241,48 @@ export default {
 <style lang="less" scoped>
   @import '../../style/common';
   @import './index';
-  .step1{
-      padding-top:110px;
-      p{
-        text-align: center;
-        font-size: 20px;
-        color: #ffffff;
-        margin:0 0 38px 0;
+  .mask{
+    width:100%;
+    height:100%;
+    position:absolute;
+    background:#273c6c;
+    top:0px;
+    left:0px;
+    opacity:0.8;
+  }
+  .nav_found{
+    padding-top:105px;
+    text-align: center;
+    margin-bottom:38px;
+    a{
+      display:inline-block;
+      width: 120px;
+      font-size: 20px;
+      font-weight: normal;
+      font-stretch: normal;
+      letter-spacing: 0px;
+      line-height:32px;
+      color: #ffffff;
+      margin-right:68px;
+      position:relative;
     }
-    .rbutton{
-      margin-top:38px;
+    .select:after{
+      content:' ';
+      position:absolute;
+      width:100%;
+      height:2px;
+      bottom:0px;
+      left:0px;
+      background-image: linear-gradient(90deg,
+      #245bfc 0%,
+      #00a7ff 100%);
+    }
+  }
+  .phone_found{
+    .rbutton {
       text-align: center;
-      margin-bottom:30px;
+      margin-top:38px;
+      margin-bottom:38px;
     }
   }
   .password{
@@ -276,35 +291,6 @@ export default {
     }
     i:nth-child(3){
       top:22px;
-    }
-  }
-  .step2, .step3{
-    padding-top:167px;
-    >p:nth-child(1){
-      text-align: center;
-      font-size: 20px;
-      color:#fff;
-      letter-spacing: 0px;
-      margin:0 0 50px 0;
-    }
-    >p:nth-child(2) {
-      margin-top:75px;
-      text-align: center;
-      font-size: 16px;
-      color:#fff;
-      letter-spacing: 0px;
-    }
-    .to_button{
-      margin-top:15px;
-      text-align: center;
-    }
-    .sbutton{
-      margin-top:50px;
-      text-align: center;
-    }
-    .login_button{
-      margin-top:18px;
-      text-align: center;
     }
   }
 </style>

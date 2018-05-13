@@ -105,5 +105,9 @@ Tool.isPoneAvailable = function (phone) {
     return true
   }
 }
+Tool.isEmail = function (email) {
+  var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+  return reg.test(email)
+}
 
 export default Tool

@@ -72,11 +72,13 @@ export default {
         }
       }
       >dl:nth-child(1){
-        width:124px;
-        height:48px;
-        margin-left:33px;
+        padding-top:6px;
+        width: 170px;
+        height: 60px;
         background:url("../../../static/img/logobg.png");
-        margin-top:6px;
+        background-size:100% 100%;
+        margin-left:0px;
+        padding-left:30px;
       }
     }
     >img{

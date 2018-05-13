@@ -26,6 +26,11 @@ var routers = [
     path: '/regist',
     name: 'regist',
     component: (resolve) => require(['@/page/user/Regist'], resolve)
+  },
+  {
+    path: '/foundPassword',
+    name: 'foundPassword',
+    component: (resolve) => require(['@/page/user/FoundPassword'], resolve)
   }
 ]
 

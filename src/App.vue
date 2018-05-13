@@ -1,7 +1,7 @@
 <template>
   <div id="app">
    <Header></Header>
-    <div class="pageContent" v-bind:style="{ minHeight:minHeight+'px' }">
+    <div class="pageContent">
       <keep-alive exclude="rightList">
           <router-view/>
       </keep-alive>
@@ -17,7 +17,6 @@ export default {
   name: 'App',
   data () {
     return {
-      minHeight: '0px'
     }
   },
   components: {
@@ -27,6 +26,16 @@ export default {
   computed: {
   },
   mounted () {
+    let currheight = 0
+    currheight = document.documentElement.clientHeight - 350
+    currheight = currheight > 500 ? (currheight + 'px') : '500px'
+    this.$store.dispatch('setMinHeight', currheight)
+    window.onresize = () => {
+      console.log('aaaaaaaaaaaaaa')
+      currheight = document.documentElement.clientHeight - 350
+      currheight = currheight > 500 ? (currheight + 'px') : '500px'
+      this.$store.dispatch('setMinHeight', currheight)
+    }
   },
   methods: {
   }
