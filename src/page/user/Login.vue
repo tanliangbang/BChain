@@ -2,7 +2,7 @@
   <section class="login">
       <div v-bind:style="{minHeight: this.$store.getters.getMinHeight}">
            <form class="login_form">
-             <p>注册一账通</p>
+             <p>登入一账通</p>
              <div class="nomalInput">
                <input v-model="loginForm.phone" placeholder="输入手机号码"/>
                <!--

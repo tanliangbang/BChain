@@ -1,9 +1,11 @@
 <template>
   <section class="foundPassword">
       <div v-bind:style="{minHeight: this.$store.getters.getMinHeight}">
-        <div class="nav_found"><a class="select">手机找回密码</a><a>邮箱找回密码</a></div>
+        <div class="nav_found">
+          <a v-on:click="toChange('phone')" :class="foundWay === 'phone'?'select':''">手机找回密码</a>
+          <a v-on:click="toChange('email')" :class="foundWay === 'email'?'select':''">邮箱找回密码</a></div>
 
-        <form class="phone_found" v-if="step === 1" v-on:keyup="onPageDown">
+        <form class="phone_found" v-if="foundWay === 'phone'" v-on:keyup="onPageDown">
              <div class="nomalInput">
                <input placeholder="输入手机号码"  v-model="registForm.phone" v-on:focus="showDel('phone')" v-on:blur="checkPhone()" type="text"/>
                <i :class="rules.phone.class" v-on:click="delContent('phone')" >{{rules.phone.message}}</i>
@@ -25,33 +27,27 @@
              </div>
 
              <div v-if="!ispass" class="rbutton">
-               <a class="no_button">确认</a>
+               <a class="no_button" v-on:click="changePass()">确认</a>
              </div>
             <div v-if="ispass" class="rbutton">
               <a v-on:click="submit"  class="ok_button">确认</a>
             </div>
           </form>
-          <form class="step2" v-if="step === 2" v-on:keyup="emailPassDown">
-             <p>
-               恭喜,注册成功~ <br/>
-               恭交易操作需要完成邮箱验证,请完成邮箱验证
-             </p>
-            <div class="nomalInput">
-              <input placeholder="请输入邮箱"  v-model="email" v-on:focus="showDel('email')" v-on:blur="checkEmail()" type="text"/>
-              <i :class="rules.email.class" v-on:click="delEmail()" >{{rules.email.message}}</i>
+          <form class="email_form" v-if="foundWay === 'email'" v-on:keyup="checkEmail()">
+            <div class="code">
+              <input type="text" v-on:focus="showDel('email')"  v-model="email" placeholder="输入验证码"/>
+              <i :class="rules.email.class"  v-on:click="delContent('email')">{{rules.email.message}}</i>
+              <span>发送邮箱</span>
             </div>
-            <div v-if="!emailpass" class="sbutton">
-               <a class="no_button">发送邮箱</a>
+            <p>已经给6481025545@qq.com发送邮件，按照邮箱提示进行密码找回</p>
+            <div v-if="!emailpass" class="toEmail">
+              <a class="no_button">登入邮箱</a>
             </div>
-            <div v-if="emailpass" class="sbutton">
-              <a class="ok_button" v-on:click="sendEmail">发送邮箱</a>
-            </div>
-            <div class="login_button">
-              <router-link class="ok_button" to="login">登入比链</router-link>
+            <div v-if="emailpass" class="toEmail">
+              <a class="ok_button">登入邮箱</a>
             </div>
           </form>
       </div>
-
   </section>
 </template>
 
@@ -65,7 +61,7 @@ export default {
     return {
       isShowpass: false,
       ispass: false,
-      step: 1,
+      foundWay: 'phone',
       emailpass: false,
       email: '',
       registForm: {
@@ -227,11 +223,11 @@ export default {
         this.emailpass = false
       }
     },
-    submit () {
-      this.step = 2
+    toChange (str) {
+      this.foundWay = str
     },
-    sendEmail () {
-      this.step = 3
+    changePass () {
+      this.$mask.showMask()
     }
   }
 }
@@ -241,14 +237,17 @@ export default {
 <style lang="less" scoped>
   @import '../../style/common';
   @import './index';
-  .mask{
-    width:100%;
-    height:100%;
-    position:absolute;
-    background:#273c6c;
-    top:0px;
-    left:0px;
-    opacity:0.8;
+  .email_form{
+    .toEmail{
+      text-align: center;
+      margin-top:10px;
+    }
+    p{
+      text-align: center;
+      color:#fff;
+      font-size:14px;
+      margin-top:36px;
+    }
   }
   .nav_found{
     padding-top:105px;
@@ -265,6 +264,7 @@ export default {
       color: #ffffff;
       margin-right:68px;
       position:relative;
+      cursor: pointer;
     }
     .select:after{
       content:' ';

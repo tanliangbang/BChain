@@ -31,7 +31,6 @@ export default {
     currheight = currheight > 500 ? (currheight + 'px') : '500px'
     this.$store.dispatch('setMinHeight', currheight)
     window.onresize = () => {
-      console.log('aaaaaaaaaaaaaa')
       currheight = document.documentElement.clientHeight - 350
       currheight = currheight > 500 ? (currheight + 'px') : '500px'
       this.$store.dispatch('setMinHeight', currheight)

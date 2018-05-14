@@ -6,14 +6,29 @@ import router from './router'
 import store from './store'
 import VueLoading from './plugins/loading/index'
 import Prompt from './plugins/prompt/index'
+import Mask from './plugins/mask/index'
+import VueI18n from 'vue-i18n'
+
+Vue.use(VueI18n)
 Vue.config.productionTip = false
 Vue.use(VueLoading)
 Vue.use(Prompt)
+Vue.use(Mask)
+
+const i18n = new VueI18n({
+  locale: 'CN',
+  messages: {
+    'CN': require('./../static/lang/cn'),
+    'EN': require('./../static/lang/en')
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   components: { App },
   template: '<App/>'
 })

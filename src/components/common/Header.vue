@@ -5,15 +5,21 @@
         <img src="../../../static/img/logo.png"/>
       </dl>
       <dl>
-        <router-link to="home">行情</router-link>
+        <router-link to="home">{{ $t("lang.header.hq") }}</router-link>
       </dl>
       <dl>
-        <router-link to="change">交易</router-link>
+        <router-link to="change">{{ $t("lang.header.jy") }}</router-link>
       </dl>
     </div>
 
-    <div>
-        中文
+    <div :class="isShowLangList?'showLang lang':'closeLang lang'">
+        <a v-on:click="toggerLang()">
+          {{currLang==='EN'?'EN':'中文'}}
+        </a>
+        <div>
+           <a v-on:click="changeLang('CN')">中文</a>
+           <a v-on:click="changeLang('EN')">English</a>
+        </div>
     </div>
      <!--<ul>
        <li>分佣推广</li>
@@ -21,8 +27,8 @@
        <li>用户昵称</li>
      </ul>-->
     <ul>
-      <li> <router-link to="login">登入</router-link></li>
-      <li><router-link to="regist">注册</router-link></li>
+      <li> <router-link to="login">{{ $t("lang.header.dr") }}</router-link></li>
+      <li><router-link to="regist">{{ $t("lang.header.zc") }}</router-link></li>
     </ul>
   </header>
 
@@ -33,11 +39,20 @@ export default {
   name: 'Header',
   data () {
     return {
+      isShowLangList: false,
+      currLang: 'CN'
     }
   },
   mounted () {
   },
   methods: {
+    toggerLang () {
+      this.isShowLangList = !this.isShowLangList
+    },
+    changeLang (str) {
+      this.isShowLangList = false
+      this.currLang = this.$i18n.locale = str
+    }
   }
 }
 </script>
@@ -106,12 +121,12 @@ export default {
        border-bottom:3px solid #fff;
     }
     ul{
-      margin:0px;
       float:right;
+      margin:0px;
       li{
-        float:left;
+        display:inline-block;
         a{
-          display:block;
+          display:inline-block;
           padding:0px 20px;
           margin-right:10px;
           text-align: center;
@@ -123,11 +138,71 @@ export default {
         }
       }
     }
-    >div:nth-child(2){
+    .lang{
       float:right;
       width:94px;
+      height:100%;
       text-align: center;
-      line-height: 60px;
+      margin-right:20px;
+      position:relative;
+      cursor: pointer;
+      >a{
+        position:absolute;
+        width:100%;
+        height:100%;
+        background:@mainColor;
+        line-height: 60px;
+        top:0px;
+        left:0px;
+        z-index:2;
+      }
+    }
+    .showLang{
+      box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+      >div{
+        position:absolute;
+        width:220px;
+        height:120px;
+        background:#294586;
+        right:0px;
+        top:60px;
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+        >a{
+          display:block;
+          padding-left:34px;
+          text-align: left;
+          margin-top:20px;
+        }
+      }
+      >a:after{
+        content:" ";
+        width: 0;
+        height: 0;
+        position:absolute;
+        top:27px;
+        left:70px;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 6px solid #fff;
+      }
+    }
+    .closeLang {
+      >div{
+        display:none;
+      }
+    }
+    .closeLang{
+      >a:after{
+        content:" ";
+        width: 0;
+        height: 0;
+        position:absolute;
+        top:27px;
+        left:70px;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 6px solid #fff;
+      }
     }
 }
 </style>

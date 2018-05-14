@@ -10,7 +10,7 @@
              <div class="code">
                <input type="text" v-on:focus="showDel('code')" v-on:blur="checkCode()" v-model="registForm.code" placeholder="输入验证码"/>
                <i :class="rules.code.class"  v-on:click="delContent('code')">{{rules.code.message}}</i>
-               <span>获取验证码</span>
+               <span v-on:click="getCode()" ref="send">获取验证码</span>
              </div>
              <div class="nomalInput password">
                <input placeholder="输入密码" v-model="registForm.password" v-on:blur="checkPass()" :type="isShowpass?'text':'password'"/>
@@ -70,6 +70,9 @@
 
 <script>
 import Tool from '../../utils/Tool'
+import '../../../static/greetest/gt'
+import * as api from '../../service/getData'
+
 export default {
   name: 'Regist',
   components: {
@@ -81,6 +84,10 @@ export default {
       step: 1,
       emailpass: false,
       email: '',
+      isSendCode: false,
+      captchaObj: null,
+      tokenId: null,
+      phone: null,
       registForm: {
         phone: '',
         code: '',
@@ -114,9 +121,48 @@ export default {
   },
   created () {
     window.scrollTo(0, 0)
-    console.log(this)
+    this.initDate()
   },
   methods: {
+    async initDate () {
+      let data = await api.getGreetest()
+      let that = this
+      window.initGeetest({
+        // 以下配置参数来自服务端 SDK
+        gt: data.gt,
+        challenge: data.challenge,
+        offline: !data.success,
+        new_captcha: data.new_captcha,
+        product: 'bind'
+      }, function (captchaObj) {
+        that.captchaObj = captchaObj
+        captchaObj.onSuccess(function () {
+          let result = captchaObj.getValidate()
+          result.mobile = that.registForm.phone
+          that.phone = that.registForm.phone
+          result.gee_token = data.gee_token
+          api.sendSMS(result).then(function (res) {
+            if (!res.tokenId) {
+              return
+            }
+            that.tokenId = res.tokenId
+            that.isSendCode = true
+            let currNode = that.$refs.send
+            let number = 60
+            currNode.innerHTML = '发送(' + number + 's)'
+            let cuntDown = setInterval(function () {
+              if (number <= 0) {
+                currNode.innerHTML = '获取验证码'
+                clearInterval(cuntDown)
+              } else {
+                number = --number
+                currNode.innerHTML = '已发送(' + number + 's)'
+              }
+            }, 1000)
+          })
+        })
+      })
+    },
     showDel (field) {
       this.rules[field].class = 'del'
       this.rules[field].message = ''
@@ -148,6 +194,13 @@ export default {
       }
     },
     checkCode (bool) {
+      if (!this.isSendCode) {
+        if (!bool) {
+          this.rules.code.class = 'del'
+          this.rules.code.message = '请获取验证码'
+        }
+        return false
+      }
       if (this.registForm.code === '') {
         if (!bool) {
           this.rules.code.class = 'del'
@@ -243,10 +296,26 @@ export default {
       }
     },
     submit () {
-      this.step = 2
+      let params = {
+        mobile: this.phone,
+        tokenId: this.tokenId,
+        code: this.registForm.code,
+        pass: Tool.md5(this.registForm.password),
+        referee: this.registForm.recommed
+      }
+      let that = this
+      api.regist(params).then(function (res) {
+        console.log(res)
+        that.step = 2
+      })
     },
     sendEmail () {
       this.step = 3
+    },
+    getCode () {
+      if (this.checkPhone() && this.$refs.send.innerHTML === '获取验证码') {
+        this.captchaObj.verify()
+      }
     }
   }
 }
