@@ -8,7 +8,7 @@
         <router-link to="home">{{ $t("lang.header.hq") }}</router-link>
       </dl>
       <dl>
-        <router-link to="change">{{ $t("lang.header.jy") }}</router-link>
+        <router-link to="legalTender">{{ $t("lang.header.jy") }}</router-link>
       </dl>
     </div>
 

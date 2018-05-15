@@ -23,6 +23,11 @@ var routers = [
     component: (resolve) => require(['@/page/user/Login'], resolve)
   },
   {
+    path: '/legalTender',
+    name: 'legalTender',
+    component: (resolve) => require(['@/page/exchange/LegalTender'], resolve)
+  },
+  {
     path: '/regist',
     name: 'regist',
     component: (resolve) => require(['@/page/user/Regist'], resolve)
