@@ -95,6 +95,13 @@ Tool.removeLocalItem = function (key) {
   return localStorage.removeItem()
 }
 
+Tool.setCookie = function (name, value) {
+  let Days = 30
+  let exp = new Date()
+  exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
+  document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString()
+}
+
 Tool.md5 = md5.hex_md5
 
 Tool.isPoneAvailable = function (phone) {
@@ -108,6 +115,25 @@ Tool.isPoneAvailable = function (phone) {
 Tool.isEmail = function (email) {
   var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
   return reg.test(email)
+}
+
+Tool.getCookie = function (name) {
+  let strcookie = document.cookie
+  let arrcookie = strcookie.split('; ')
+  for (let i = 0; i < arrcookie.length; i++) {
+    var arr = arrcookie[i].split('=')
+    if (arr[0] === name) {
+      return arr[1]
+    }
+  }
+  return false
+}
+
+Tool.isLogin = function () {
+  if (Tool.getCookie('ngtoken')) {
+    return true
+  }
+  return false
 }
 
 export default Tool

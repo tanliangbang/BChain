@@ -27,6 +27,7 @@ export default {
   },
   mounted () {
     let currheight = 0
+    this.$store.dispatch('getUserInfo')
     currheight = document.documentElement.clientHeight - 350
     currheight = currheight > 500 ? (currheight + 'px') : '500px'
     this.$store.dispatch('setMinHeight', currheight)

@@ -48,7 +48,7 @@
               <a class="ok_button" v-on:click="sendEmail">发送邮箱</a>
             </div>
             <div class="login_button">
-              <router-link class="ok_button" to="login">登入比链</router-link>
+              <router-link class="border_button" to="login">返回首页</router-link>
             </div>
           </form>
           <form class="step3" v-if="step === 3">
@@ -56,12 +56,12 @@
               恭喜,注册成功~ <br/>
               恭交易操作需要完成邮箱验证,请完成邮箱验证
             </p>
-            <p>已发送 648103576@qq.com </p>
+            <p>已发送 {{email}} </p>
             <div  class="to_button">
-              <a href="mailto:648103576@qq.com" class="ok_button">登入邮箱</a>
+              <a v-on:click="loginEmail" class="ok_button">登入邮箱</a>
             </div>
             <div class="login_button">
-              <router-link class="ok_button" to="login">登入比链</router-link>
+              <router-link class="border_button" to="/">返回首页</router-link>
             </div>
           </form>
       </div>
@@ -143,6 +143,7 @@ export default {
           result.gee_token = data.gee_token
           api.sendSMS(result).then(function (res) {
             if (!res.tokenId) {
+              that.$prompt.error('发送失败')
               return
             }
             that.tokenId = res.tokenId
@@ -289,7 +290,7 @@ export default {
       }
     },
     emailPassDown () {
-      if (this.checkEmail()) {
+      if (this.checkEmail(true)) {
         this.emailpass = true
       } else {
         this.emailpass = false
@@ -305,17 +306,58 @@ export default {
       }
       let that = this
       api.regist(params).then(function (res) {
-        console.log(res)
-        that.step = 2
+        if (res.data.ngtoken) {
+          Tool.setCookie('ngtoken', res.ngtoken)
+          that.$store.dispatch('setUserInfo', res.userinfo)
+          that.$router.push('/')
+          that.step = 2
+        }
       })
     },
     sendEmail () {
-      this.step = 3
+      let _this = this
+      this.emailpass = false
+      api.bindEmail({email: this.email}).then(function (res) {
+        if (res.status) {
+          _this.step = 3
+        } else {
+          this.emailpass = true
+        }
+      })
     },
     getCode () {
       if (this.checkPhone() && this.$refs.send.innerHTML === '获取验证码') {
         this.captchaObj.verify()
       }
+    },
+    loginEmail () {
+      let email = this.email
+      let pre = email.split('@')[1]
+      let hash = {
+        'qq.com': 'http://mail.qq.com',
+        'gmail.com': 'http://mail.google.com',
+        'sina.com': 'http://mail.sina.com.cn',
+        '163.com': 'http://mail.163.com',
+        '126.com': 'http://mail.126.com',
+        'yeah.net': 'http://www.yeah.net/',
+        'sohu.com': 'http://mail.sohu.com/',
+        'tom.com': 'http://mail.tom.com/',
+        'sogou.com': 'http://mail.sogou.com/',
+        '139.com': 'http://mail.10086.cn/',
+        'hotmail.com': 'http://www.hotmail.com',
+        'live.com': 'http://login.live.com/',
+        'live.cn': 'http://login.live.cn/',
+        'live.com.cn': 'http://login.live.com.cn',
+        '189.com': 'http://webmail16.189.cn/webmail/',
+        'yahoo.com.cn': 'http://mail.cn.yahoo.com/',
+        'yahoo.cn': 'http://mail.cn.yahoo.com/',
+        'eyou.com': 'http://www.eyou.com/',
+        '21cn.com': 'http://mail.21cn.com/',
+        '188.com': 'http://www.188.com/',
+        'foxmail.com': 'http://www.foxmail.com',
+        'outlook.com': 'http://www.outlook.com'
+      }
+      window.open(hash[pre])
     }
   }
 }

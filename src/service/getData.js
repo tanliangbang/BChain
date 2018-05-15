@@ -21,3 +21,18 @@ export const sendSMS = (params) => http.post(base + '/tokens/sms', params)
  * 注册
  */
 export const regist = (params) => http.post(base + '/tokens/mobiles', params)
+
+/**
+ * 登入
+ */
+export const accounts = (params) => http.post(base + '/tokens/accounts', params)
+
+/**
+ * 获取用户信息
+ */
+export const getUserInfo = (params) => http.get(base + '/user/current', params)
+
+/**
+ * 绑定邮箱
+ */
+export const bindEmail = (params) => http.post(base + '/tokens/email/bind', params)

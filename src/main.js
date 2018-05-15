@@ -8,6 +8,7 @@ import VueLoading from './plugins/loading/index'
 import Prompt from './plugins/prompt/index'
 import Mask from './plugins/mask/index'
 import VueI18n from 'vue-i18n'
+import Tool from './utils/Tool'
 
 Vue.use(VueI18n)
 Vue.config.productionTip = false
@@ -21,6 +22,16 @@ const i18n = new VueI18n({
     'CN': require('./../static/lang/cn'),
     'EN': require('./../static/lang/en')
   }
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'login') {
+    if (Tool.isLogin()) {
+      next({path: '/'})
+      return true
+    }
+  }
+  next()
 })
 
 /* eslint-disable no-new */

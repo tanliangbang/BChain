@@ -21,12 +21,12 @@
            <a v-on:click="changeLang('EN')">English</a>
         </div>
     </div>
-     <!--<ul>
-       <li>分佣推广</li>
-       <li>资产管理</li>
-       <li>用户昵称</li>
-     </ul>-->
-    <ul>
+     <ul v-if="this.$store.state.user.userInfo !== null">
+       <li><router-link to="login">分佣推广</router-link></li>
+       <li><router-link to="login">资产管理</router-link></li>
+       <li><router-link to="login">{{this.$store.state.user.userInfo.mobile}}</router-link></li>
+     </ul>
+    <ul v-if="this.$store.state.user.userInfo === null">
       <li> <router-link to="login">{{ $t("lang.header.dr") }}</router-link></li>
       <li><router-link to="regist">{{ $t("lang.header.zc") }}</router-link></li>
     </ul>

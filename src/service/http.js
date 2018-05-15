@@ -11,7 +11,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => response, error => Promise.resolve(error.response))
 
 function checkStatus (response) {
-  NProgress.done()
+  console.log(response)
   if (response.status === 200 || response.status === 304) {
     return response
   }
@@ -28,7 +28,7 @@ function checkCode (res) {
   if (res.data.statusCode !== 200) {
     return res.data
   }
-  return res.data.data
+  return res.data
 }
 
 export default {
