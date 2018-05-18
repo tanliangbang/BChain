@@ -83,7 +83,7 @@ export default {
           result.account = that.loginForm.phone
           result.pass = Tool.md5(that.loginForm.password)
           api.accounts(result).then(function (res) {
-            if (res.ngtoken) {
+            if (res.data.code === 10000 && res.ngtoken) {
               Tool.setCookie('ngtoken', res.ngtoken)
               that.$store.dispatch('setUserInfo', res.userinfo)
               that.$router.push('/')

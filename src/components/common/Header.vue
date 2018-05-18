@@ -8,7 +8,10 @@
         <router-link to="home">{{ $t("lang.header.hq") }}</router-link>
       </dl>
       <dl>
-        <router-link to="legalTender">{{ $t("lang.header.jy") }}</router-link>
+        <router-link to="coinToCoin">币币交易</router-link>
+      </dl>
+      <dl>
+        <router-link to="legalTender">法币交易</router-link>
       </dl>
     </div>
 
@@ -67,7 +70,7 @@ export default {
     height: 60px;
     background: @mainColor;
     color:#fff;
-    font-size:18px;
+    font-size:16px;
     transition: all 1s ease;
     padding:0px;
     z-index:2;

@@ -1,10 +1,10 @@
 <template>
   <div class="legalTender">
      <section>
-        <nav class="exchangeNav">
-          <a class="selected">法币交易</a>
-          <a class="unselect">货币交易</a>
-        </nav>
+       <!-- <nav class="exchangeNav">
+          <router-link to="legalTender" class="selected">法币交易</router-link>
+          <router-link to="coinToCoin" class="unselect">币币交易</router-link>
+        </nav>-->
 
        <header>
           <div>

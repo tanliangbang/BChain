@@ -25,6 +25,7 @@
              <div class="nomalInput">
                <input placeholder="推荐人" type="text"/>
              </div>
+            <p :class="error?'registFial':'visiable'">{{errorMessage}}</p>
              <div v-if="!ispass" class="rbutton">
                <a class="no_button">下一步</a>
              </div>
@@ -88,6 +89,8 @@ export default {
       captchaObj: null,
       tokenId: null,
       phone: null,
+      error: false,
+      errorMessage: '注册失败',
       registForm: {
         phone: '',
         code: '',
@@ -283,6 +286,7 @@ export default {
       this.isShowpass = !this.isShowpass
     },
     onPageDown () {
+      this.error = false
       if (this.checkPhone(true) && this.checkCode(true) && this.checkPass(true) && this.checkRePass(true)) {
         this.ispass = true
       } else {
@@ -305,12 +309,22 @@ export default {
         referee: this.registForm.recommed
       }
       let that = this
+      this.ispass = false
       api.regist(params).then(function (res) {
-        if (res.data.ngtoken) {
+        if (res.data.code === 10000 && res.data.ngtoken) {
           Tool.setCookie('ngtoken', res.ngtoken)
           that.$store.dispatch('setUserInfo', res.userinfo)
           that.$router.push('/')
           that.step = 2
+        } else {
+          if (res.data.code === 10002) {
+            this.error = true
+            this.errorMessage = '验证码错误'
+          } else {
+            this.error = true
+            this.errorMessage = '注册失败'
+          }
+          that.ispass = true
         }
       })
     },
@@ -375,8 +389,13 @@ export default {
         color: #ffffff;
         margin:0 0 38px 0;
     }
+    .registFial{
+      margin-top:28px;
+      margin-bottom:10px;
+      font-size:14px;
+      color: #39f1ff;
+    }
     .rbutton{
-      margin-top:38px;
       text-align: center;
       margin-bottom:30px;
     }
@@ -417,5 +436,8 @@ export default {
       margin-top:18px;
       text-align: center;
     }
+  }
+  .visiable{
+    visibility: hidden;
   }
 </style>

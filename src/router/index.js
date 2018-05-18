@@ -28,6 +28,15 @@ var routers = [
     component: (resolve) => require(['@/page/exchange/LegalTender'], resolve)
   },
   {
+    path: '/coinToCoin',
+    name: 'coinToCoin',
+    component: (resolve) => require(['@/page/exchange/CoinToCoin'], resolve)
+  },{
+    path: '/userCenter',
+    name: 'userCenter',
+    component: (resolve) => require(['@/page/user/UserCenter'], resolve)
+  },
+  {
     path: '/regist',
     name: 'regist',
     component: (resolve) => require(['@/page/user/Regist'], resolve)
