@@ -31,7 +31,8 @@ var routers = [
     path: '/coinToCoin',
     name: 'coinToCoin',
     component: (resolve) => require(['@/page/exchange/CoinToCoin'], resolve)
-  },{
+  },
+  {
     path: '/userCenter',
     name: 'userCenter',
     component: (resolve) => require(['@/page/user/UserCenter'], resolve)
