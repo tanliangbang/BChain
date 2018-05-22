@@ -2,6 +2,7 @@
 /config/
 /dist/
 /src/utils/md5.js
+/src/page/exchange/CoinToCoin.vue
 /static/greetest/gt.js
 /*.js
 /test/unit/coverage/

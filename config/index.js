@@ -13,6 +13,9 @@ module.exports = {
     proxyTable:{'/api': {
         target: 'http://154.48.249.19:8111',
         secure: false
+      },'/market': {
+        target: 'http://154.48.249.4',
+        secure: false
       }},
 
     // Various Dev Server settings
