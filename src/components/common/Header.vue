@@ -73,7 +73,7 @@ export default {
     font-size:16px;
     transition: all 1s ease;
     padding:0px;
-    z-index:2;
+    z-index:10;
     min-width:1000px;
     >div:nth-child(1){
       float:left;

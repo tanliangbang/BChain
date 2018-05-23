@@ -1,5 +1,5 @@
 <template>
-  <div class="coinToCoin">
+  <div class="coinToCoin" v-on:click="containerClick">
     <section>
 
        <div class="coin-nav">
@@ -50,27 +50,32 @@
               </ul>
           </div>
 
-          <div id="tv_chart_container"></div>
+          <KeyLine ref="keyLine"/>
 
           <div class="buy-input-list">
              <div>
                 <div class="my-info">
                    <div>
-                      <span>货币资产</span>
-                      <span>总计:1234.565BTC</span>
+                      <p>货币资产</p>
+                      <p>总计:1234.565BTC</p>
                    </div>
                    <div>
-                     <span>BTC 可用80.28</span>
-                     <span>BTC 可用80.28</span>
+                     <p>BTC 可用80.28</p>
+                     <p>BTC 可用80.28</p>
                    </div>
                    <div>
-                     <a>充值BTC</a>
-                     <a>充值BTC</a>
+                     <p>充值BTC</p>
+                     <p>充值BTC</p>
                    </div>
                 </div>
-             </div>
-             <div>
 
+                <div>
+                  <Entrust/>
+                </div>
+             </div>
+
+             <div>
+               <CurrEntrustList/>
              </div>
           </div>
 
@@ -81,12 +86,15 @@
 </template>
 
 <script>
-import {datafeed} from '../../../static/charting_library/datafeeds/myudf/datafeed'
-let  TradingView = require('../../../static/charting_library/charting_library/charting_library.min.js')
-let Datafeeds = null
+import KeyLine from './model/KeyLine'
+import CurrEntrustList from './model/CurrEntrustList'
+import Entrust from './model/Entrust'
 export default {
   name: 'CoinToCoin',
   components: {
+    KeyLine,
+    CurrEntrustList,
+    Entrust
   },
   data () {
     return {
@@ -94,99 +102,11 @@ export default {
   },
   mounted () {
     window.scrollTo(0, 0)
-    let symbol = 'btcusdt'
-    var widget = new TradingView.widget({
-      fullscreen: true,
-      symbol: symbol,
-      interval: '1',
-      timezone:'Asia/Shanghai',
-      toolbar_bg: '#273c6c',
-      allow_symbol_change: true,
-      container_id: "tv_chart_container",
-      datafeed: datafeed,
-      library_path: "../../../static/charting_library/charting_library/",
-      locale: "zh",
-      custom_css_url:"css/charting.css",
-      drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
-      disabled_features: ["use_localstorage_for_settings", "volume_force_overlay"],
-      fullscreen:false,
-      debug:true,
-      drawings_access: { type: 'black', tools: [{ name: "Regression Trend" }] },
-      disabled_features: ["use_localstorage_for_settings", "header_chart_type","header_symbol_search", "timeframes_toolbar",
-        "volume_force_overlay", "header_saveload", "header_resolutions", "header_compare", "header_undo_redo",
-        "header_screenshot", "display_market_status","adaptive_logo","dont_show_boolean_study_arguments"],
-      overrides: { //k线的颜色
-        "symbolWatermarkProperties.transparency": 90,
-        "scalesProperties.textColor": "#ddd",
-        "paneProperties.vertGridProperties.color": "#273c6c",
-        "paneProperties.horzGridProperties.color": "#273c6c",
-        "paneProperties.crossHairProperties.color": "#fafafa",
-        "volumePaneSize": "small",
-        "paneProperties.legendProperties.showLegend": false, //折叠信息
-        "paneProperties.background": '#273c6c',
-        "mainSeriesProperties.candleStyle": {
-          upColor: "#589065",
-          downColor: "#ae4e54",
-          drawBorder: true,
-          borderColor: "#ae4e54",
-          borderUpColor: "#589065",
-          borderDownColor: "#ae4e54",
-          drawWick: true,
-          wickColor: "#737375",
-          wickUpColor: "#589065",
-          wickDownColor: "#ae4e54",
-          barColorsOnPrevClose: !1,
-        }
-      },
-      width:1500,
-      height:500
-    });
-
-    widget.onChartReady(function() {
-      widget.chart().createStudy("Moving Average", false, false, [5], null, { "plot.color": "#9660c4" });
-      widget.chart().createStudy("Moving Average", false, false, [10], null, { "plot.color": "#84aad5" });
-      widget.chart().createStudy("Moving Average", false, false, [20], null, { "plot.color": "#55b263" });
-      var c = widget.chart().getAllStudies()
-      widget.chart().executeActionById("drawingToolbarAction");
-      widget.chart().executeActionById("studyHide");
-      var timeList = ['1', '5', '15', '30', '60', '1D', '1W', '1M']
-      let buttonArr = []
-      let fx = widget.createButton().attr('title', "分时").append('<span>'+ "分时" +'</span>')
-      fx.parent().addClass("dataSelect")
-      buttonArr.push(fx)
-      fx.on('click',function(){
-        for (let i = 0; i < buttonArr.length; i++) {
-          buttonArr[i].removeClass('selected')
-        }
-        fx.addClass('selected')
-        widget.chart().setChartType(3)
-      })
-      timeList.forEach(function(v){
-        let button = widget.createButton();
-        button.attr('title', v)
-        if (v === '1') {
-          button.addClass('selected')
-        }
-        button.parent().addClass("dataSelect")
-        button.append('<span>'+ v +'min</span>')
-        buttonArr.push(button)
-        button.on('click', function(a){
-          localStorage.setItem('klineTime', v);
-          widget.chart().setChartType(1)
-          for (let i = 0; i < buttonArr.length; i++) {
-            buttonArr[i].removeClass('selected')
-          }
-          button.addClass('selected')
-          widget.chart().setResolution(v, function(){
-
-          })
-        })
-      })
-    });
-
-
   },
   methods: {
+    containerClick () {
+      this.$refs.keyLine.maskShow = true
+    }
   }
 }
 </script>
@@ -194,7 +114,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 @import "./index";
-
 .coinToCoin{
   margin:20px;
   .coin-nav{
@@ -218,8 +137,8 @@ export default {
   .container{
     margin-top:25px;
     width:100%;
-    height:1000px;
     position:relative;
+    min-height:1280px;
     .coin-list{
       width:345px;
       background:@bg_color;
@@ -357,16 +276,42 @@ export default {
 }
 
 .buy-input-list{
+  margin-top:20px;
   >div:nth-child(1) {
     float:left;
     width:54%;
     .my-info{
-
+      height:112px;
+      background:@bg_color;
+      display: flex;
+      flex-wrap: wrap-reverse;
+      >div{
+        padding-top:26px;
+        flex:1;
+        color:#fff;
+        >p:nth-child(2) {
+          margin-top:18px;
+        }
+      }
+      >div:nth-child(1){
+        padding-left:38px;
+      }
+      >div:nth-child(2) {
+        p{
+          text-align: center;
+        }
+      }
+      >div:nth-child(3) {
+        text-align: right;
+        padding-right:38px;
+      }
     }
   }
-  >div:nth-child(1) {
+  >div:nth-child(2) {
+    padding-left:18px;
     float:left;
     width:46%;
+    box-sizing: border-box;
   }
 }
 

@@ -1,11 +1,7 @@
 <template>
   <div class="legalTender">
+     <MakeOrder ref="makeOrder"/>
      <section>
-       <!-- <nav class="exchangeNav">
-          <router-link to="legalTender" class="selected">法币交易</router-link>
-          <router-link to="coinToCoin" class="unselect">币币交易</router-link>
-        </nav>-->
-
        <header>
           <div>
              <div>买</div>
@@ -36,6 +32,10 @@
                  <p>交易场所</p>
                  <span>全部</span>
                </div>
+             <div>
+               <p>发布广告</p>
+               <span>全部</span>
+             </div>
            </div>
        </header>
        <div class="exList">
@@ -56,7 +56,7 @@
              <td>$50998.89</td>
              <td>支付宝</td>
              <td>火币网</td>
-             <td>去交易</td>
+             <td><a class="showExchagne" v-on:click="makeOrder">去交易</a></td>
            </tr>
          </table>
          <div>
@@ -103,9 +103,11 @@
 </template>
 
 <script>
+import MakeOrder from './model/MakeOrder'
 export default {
   name: 'LegalTender',
   components: {
+    MakeOrder
   },
   data () {
     return {
@@ -115,6 +117,9 @@ export default {
     window.scrollTo(0, 0)
   },
   methods: {
+    makeOrder () {
+      this.$refs.makeOrder.showMakeOrder()
+    }
   }
 }
 </script>
@@ -123,4 +128,10 @@ export default {
 <style lang="less" scoped>
 @import "./../../style/common";
 @import "./index";
+.showExchagne:after{
+  content:'aaa';
+}
+.showExchagne {
+  cursor: pointer;
+}
 </style>

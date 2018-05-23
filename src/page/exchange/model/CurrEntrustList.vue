@@ -1,0 +1,113 @@
+<template>
+  <div class="currEntrustList">
+    <div>
+       最新价 9827.69 USDT ~ 54983.35
+    </div>
+    <div>
+      <div>
+        <table cellpadding="0" cellspacing="0">
+          <tr><th></th><th>价格(USDT)</th><th>数量(BTC)</th><th>累计(BTC)</th></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+        </table>
+      </div>
+      <div>
+        <table cellpadding="0" cellspacing="0">
+          <tr><th></th><th>价格(USDT)</th><th>数量(BTC)</th><th>累计(BTC)</th></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'CurrEntrustList',
+  components: {
+  },
+  data () {
+    return {
+    }
+  },
+  created () {
+    window.scrollTo(0, 0)
+  },
+  methods: {
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="less" scoped>
+@import "./../../../style/var";
+  .currEntrustList{
+    >div:nth-child(1) {
+      height:66px;
+      line-height:66px;
+      background:@bg_color;
+      font-size:18px;
+      color:#fff;
+      padding-left:66px;
+    }
+    >div:nth-child(2) {
+      display:flex;
+      flex-wrap:wrap-reverse;
+      >div:nth-child(1) {
+        table{
+          tr{
+            td:nth-child(2){
+              color: #fafc68;
+            }
+          }
+        }
+      }
+      >div:nth-child(2) {
+        table{
+          tr{
+            td:nth-child(2){
+              color: #00eeff;
+            }
+          }
+        }
+      }
+      >div{
+        flex:1;
+        display:inline-block;
+        table{
+          width:100%;
+          font-size:13px;
+          tr{
+            line-height: 45px;
+            td:nth-child(1) {
+              padding-left:20px;
+            }
+          }
+          tr:nth-child(even) {
+            background:@bg_color;
+          }
+          tr:nth-child(odd) {
+            background:#273a67;
+          }
+        }
+      }
+    }
+}
+</style>
