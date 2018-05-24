@@ -50,7 +50,7 @@
                       <span></span>
                     </div>
                     <div>
-                      <a class="btn">下单</a>
+                      <a class="btn" v-on:click="submit">下单</a>
                     </div>
                   </div>
                </div>
@@ -79,6 +79,10 @@ export default {
     },
     showMakeOrder () {
       this.isShow = true
+    },
+    submit () {
+      this.isShow = false
+      this.$mask.showAlert('订单已发送', 'success')
     }
   }
 }
@@ -86,16 +90,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
+  @import "../../../style/var";
 .makeOrder{
   padding:40px;
   .mask{
     position:fixed;
     width:100%;
     height:100%;
-    background-color: #273c6c;
     z-index:2;
-    top:0px;
-    left:0px;
+    top:0;
+    left:0;
+    background:@bg_color;
     opacity:0.8;
   }
   .order-content{
@@ -206,6 +211,9 @@ export default {
               border-radius: 8px;
               margin:0 14px;
               border: solid 2px #304a87;
+              font-size: 16px;
+              color:#fff;
+              padding-left:10px;
             }
             textarea{
               height:150px;

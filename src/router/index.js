@@ -13,11 +13,6 @@ var routers = [
     component: (resolve) => require(['@/page/Index'], resolve)
   },
   {
-    path: '/detail',
-    name: 'detail',
-    component: (resolve) => require(['@/page/user/Detail'], resolve)
-  },
-  {
     path: '/login',
     name: 'login',
     component: (resolve) => require(['@/page/user/Login'], resolve)
@@ -46,6 +41,11 @@ var routers = [
     path: '/foundPassword',
     name: 'foundPassword',
     component: (resolve) => require(['@/page/user/FoundPassword'], resolve)
+  },
+  {
+    path: '/entrustManage',
+    name: 'entrustManage',
+    component: (resolve) => require(['@/page/user/EntrustManage'], resolve)
   }
 ]
 

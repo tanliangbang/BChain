@@ -1,6 +1,7 @@
 <template>
   <div class="legalTender">
      <MakeOrder ref="makeOrder"/>
+     <OrderInfo ref="orderInfo"/>
      <section>
        <header>
           <div>
@@ -32,10 +33,6 @@
                  <p>交易场所</p>
                  <span>全部</span>
                </div>
-             <div>
-               <p>发布广告</p>
-               <span>全部</span>
-             </div>
            </div>
        </header>
        <div class="exList">
@@ -86,8 +83,58 @@
              <th width="12.5%">状态</th>
              <th width="12.5%">对手方</th>
            </tr>
-           <tr v-for="item in [0,1,2,3,4,5,6,7,8,9]" :key="item">
-             <td>{{item}}HB20214</td>
+           <tr v-on:click="showOrderInfo">
+             <td>HB20214</td>
+             <td>买入</td>
+             <td>BTC</td>
+             <td>2.234234</td>
+             <td>1212312 CNY</td>
+             <td>2018/04/19 12:21:37</td>
+             <td>已付款</td>
+             <td>风清扬</td>
+           </tr>
+           <tr v-on:click="showOrderInfo">
+             <td>HB20214</td>
+             <td>买入</td>
+             <td>BTC</td>
+             <td>2.234234</td>
+             <td>1212312 CNY</td>
+             <td>2018/04/19 12:21:37</td>
+             <td>已付款</td>
+             <td>风清扬</td>
+           </tr>
+           <tr v-on:click="showOrderInfo">
+             <td>HB20214</td>
+             <td>买入</td>
+             <td>BTC</td>
+             <td>2.234234</td>
+             <td>1212312 CNY</td>
+             <td>2018/04/19 12:21:37</td>
+             <td>已取消</td>
+             <td>风清扬</td>
+           </tr>
+           <tr v-on:click="showOrderInfo">
+             <td>HB20214</td>
+             <td>买入</td>
+             <td>BTC</td>
+             <td>2.234234</td>
+             <td>1212312 CNY</td>
+             <td>2018/04/19 12:21:37</td>
+             <td>已付款</td>
+             <td>风清扬</td>
+           </tr>
+           <tr v-on:click="showOrderInfo">
+             <td>HB20214</td>
+             <td>买入</td>
+             <td>BTC</td>
+             <td>2.234234</td>
+             <td>1212312 CNY</td>
+             <td>2018/04/19 12:21:37</td>
+             <td>已付款</td>
+             <td>风清扬</td>
+           </tr>
+           <tr v-on:click="showOrderInfo">
+             <td>HB20214</td>
              <td>买入</td>
              <td>BTC</td>
              <td>2.234234</td>
@@ -104,10 +151,12 @@
 
 <script>
 import MakeOrder from './model/MakeOrder'
+import OrderInfo from './model/OrderInfo'
 export default {
   name: 'LegalTender',
   components: {
-    MakeOrder
+    MakeOrder,
+    OrderInfo
   },
   data () {
     return {
@@ -119,6 +168,9 @@ export default {
   methods: {
     makeOrder () {
       this.$refs.makeOrder.showMakeOrder()
+    },
+    showOrderInfo () {
+      this.$refs.orderInfo.showMakeOrder()
     }
   }
 }
@@ -129,9 +181,29 @@ export default {
 @import "./../../style/common";
 @import "./index";
 .showExchagne:after{
-  content:'aaa';
+  content:" ";
+  width: 0;
+  height: 0;
+  position:absolute;
+  top:5px;
+  left:50px;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-left: 6px solid #0087ff;
+}
+.showExchagne:before{
+  content:" ";
+  width: 0;
+  height: 0;
+  position:absolute;
+  top:5px;
+  left:58px;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-left: 6px solid #0087ff;
 }
 .showExchagne {
   cursor: pointer;
+  position:relative;
 }
 </style>

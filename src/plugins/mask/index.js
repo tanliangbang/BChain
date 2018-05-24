@@ -24,13 +24,23 @@ export default {
         document.querySelector(pluginOptions.container || 'body').appendChild(temp.$el)
       }
     }
-    $mask.showMask = function (message) {
+    $mask.showMask = function () {
       showPrompt()
       temp.showMask()
     }
-    $mask.closeMask = function (message) {
+    $mask.closeMask = function () {
       showPrompt()
       temp.closeMask()
+    }
+    $mask.showAlert = function (message, type, callback) {
+      showPrompt()
+      temp.showMask()
+      temp.showAlert(message, type, callback)
+    }
+    $mask.closeAlert = function () {
+      showPrompt()
+      temp.showMask()
+      temp.closeAlert()
     }
     Vue.$mask = Vue.prototype.$mask = $mask
   }
