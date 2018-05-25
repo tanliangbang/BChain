@@ -26,7 +26,7 @@
     </div>
      <ul v-if="this.$store.state.user.userInfo === null">
        <li><router-link to="entrustManage">委托管理</router-link></li>
-       <li><router-link to="login">资产管理</router-link></li>
+       <li><router-link to="assetManage">资产管理</router-link></li>
        <li><router-link to="userCenter">18721675880 <!--{{this.$store.state.user.userInfo.mobile}}--></router-link></li>
      </ul>
     <ul v-if="this.$store.state.user.userInfo !== null">

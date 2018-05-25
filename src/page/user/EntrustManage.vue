@@ -193,6 +193,7 @@ export default {
           line-height: 50px;
           text-align: center;
           flex: 1;
+          cursor: pointer;
         }
       }
       .opera{

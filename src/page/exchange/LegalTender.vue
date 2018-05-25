@@ -7,17 +7,17 @@
           <div>
              <div>买</div>
              <div>
-                <span class="selected">BTC</span>
-                <span>ETH</span>
-                <span>USDT</span>
+                <a v-on:click="changeType(1)" :class="currType===1?'selected':''">BTC</a>
+                <a v-on:click="changeType(2)" :class="currType===2?'selected':''">ETH</a>
+                <a v-on:click="changeType(3)" :class="currType===3?'selected':''">USDT</a>
              </div>
           </div>
            <div>
              <div>卖</div>
              <div>
-               <span>BTC</span>
-               <span>ETH</span>
-               <span>USDT</span>
+               <a v-on:click="changeType(4)" :class="currType===4?'selected':''">BTC</a>
+               <a v-on:click="changeType(5)" :class="currType===5?'selected':''">ETH</a>
+               <a v-on:click="changeType(6)" :class="currType===6?'selected':''">USDT</a>
              </div>
            </div>
            <div>
@@ -160,6 +160,7 @@ export default {
   },
   data () {
     return {
+      currType: 1
     }
   },
   created () {
@@ -167,10 +168,13 @@ export default {
   },
   methods: {
     makeOrder () {
-      this.$refs.makeOrder.showMakeOrder()
+      this.$refs.makeOrder.showMakeOrder('recharge')
     },
     showOrderInfo () {
-      this.$refs.orderInfo.showMakeOrder()
+      this.$refs.orderInfo.showMakeOrder('enchashment')
+    },
+    changeType (num) {
+      this.currType = num
     }
   }
 }

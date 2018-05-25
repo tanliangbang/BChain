@@ -17,7 +17,7 @@
      </section>
     <section>
        <ul>
-         <li v-for="item in recommend" :key="item.id">
+         <li v-for="item in recommend" :key="item.id" v-on:click="toDetail()">
            <p :class="item.quotes.USD['percent_change_24h']>0?'raise':'fail'">
              {{item.quotes.USD["percent_change_24h"]+"%"}}
            </p>
@@ -50,7 +50,7 @@
                </tr>
             </thead>
             <tbody>
-                <tr v-for="(item,index) in coinList" :key="item.id"   v-on:click="toDetail(index)">
+                <tr v-for="item in coinList" :key="item.id"   v-on:click="toDetail()">
                   <td>{{item["symbol"]}}</td>
                   <td>${{item.quotes.USD["market_cap"]}}</td>
                   <td>{{item.quotes.USD["volume_24h"]}}</td>
@@ -90,11 +90,19 @@ export default {
     window.scrollTo(0, 0)
   },
   mounted () {
+    let ws = new window.WebSocket('ws://154.48.249.19:443')
+    ws.onopen = function (e) {}
+    ws.onmessage = function (evt) {
+      let data = null
+      if (evt.data) {
+        data = JSON.parse(evt.data).data
+      }
+      console.log(data)
+    }
   },
   methods: {
-    toDetail (index) {
-      console.log(index)
-      // this.$router.push('detail')
+    toDetail () {
+      this.$router.push('coinToCoin')
     },
     async initDate () {
       let data = await api.getCoinList()

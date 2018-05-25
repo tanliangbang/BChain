@@ -46,6 +46,16 @@ var routers = [
     path: '/entrustManage',
     name: 'entrustManage',
     component: (resolve) => require(['@/page/user/EntrustManage'], resolve)
+  },
+  {
+    path: '/assetManage',
+    name: 'assetManage',
+    component: (resolve) => require(['@/page/user/AssetManage'], resolve)
+  },
+  {
+    path: '/financeRecord',
+    name: 'financeRecord',
+    component: (resolve) => require(['@/page/user/FinanceRecord'], resolve)
   }
 ]
 
