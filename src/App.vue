@@ -2,9 +2,7 @@
   <div id="app">
    <Header></Header>
     <div class="pageContent">
-      <keep-alive exclude="rightList">
-          <router-view/>
-      </keep-alive>
+       <router-view/>
     </div>
     <Footer></Footer>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="entrustManage">
+  <div class="entrustManage" v-bind:style="{minHeight: this.$store.getters.getMinHeight}">
       <div class="header">
          <div>
              <a v-on:click="changeStatus(1)" :class="status===1?'selected':''">当前委托</a>
@@ -213,7 +213,7 @@ export default {
           width:22px;
           height:22px;
           position:absolute;
-          background:url('../../../static/img/check.png')
+        //  background:url('../../../static/img/check.png')
         }
         input[type^="checkbox"]:checked:after{
           top:-16px;
@@ -221,7 +221,7 @@ export default {
           width:22px;
           height:22px;
           position:absolute;
-          background:url('../../../static/img/checked.png')
+        //  background:url('../../../static/img/checked.png')
         }
         input[type^="text"]{
           width: 216px;

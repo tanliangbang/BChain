@@ -31,9 +31,7 @@
 
     <section>
       <div class="header">
-         <span :class="currBaseCoin==='usdt'?'selected':''" v-on:click="toChange('usdt')">USDT</span>
-         <span :class="currBaseCoin==='btc'?'selected':''" v-on:click="toChange('btc')">BTC</span>
-         <span :class="currBaseCoin==='eth'?'selected':''" v-on:click="toChange('eth')">ETH</span>
+         <span :class="currBaseCoin==='usdt'?'selected':''" v-on:click="toChange('usdt')">所有</span>
          <span>自选</span>
         {{currBaseCoin}}
       </div>

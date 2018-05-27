@@ -30,7 +30,12 @@ var routers = [
   {
     path: '/userCenter',
     name: 'userCenter',
-    component: (resolve) => require(['@/page/user/UserCenter'], resolve)
+    component: (resolve) => require(['@/page/user/userCenter/UserCenter'], resolve)
+  },
+  {
+    path: '/addPayWay',
+    name: 'addPayWay',
+    component: (resolve) => require(['@/page/user/userCenter/AddPayWay'], resolve)
   },
   {
     path: '/regist',

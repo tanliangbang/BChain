@@ -1,5 +1,5 @@
 <template>
-  <div class="assetManage">
+  <div class="assetManage" v-bind:style="{minHeight: this.$store.getters.getMinHeight}">
     <RechargeAndEnchashment ref="reEn"/>
     <div class="asset-header">
       <div>

@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted () {
-    let symbol = 'btcusdt'
+    let symbol = 'eosusdt'
     var widget = new TradingView.widget({
       fullscreen: true,
       symbol: symbol,
@@ -63,7 +63,7 @@ export default {
           barColorsOnPrevClose: !1,
         }
       },
-      width:1500,
+      width:'100%',
       height:500
     });
 

@@ -102,7 +102,7 @@ export default {
       height:20px;
       vertical-align: -4px;
       margin-right:5px;
-      background:url("../../../static/img/pok.png")
+     // background:url("../../../static/img/pok.png")
     }
     .fail:before{
       content:'';
@@ -111,7 +111,7 @@ export default {
       height:20px;
       vertical-align: -4px;
       margin-right:5px;
-      background:url("../../../static/img/pfail.png")
+     // background:url("../../../static/img/pfail.png")
     }
     .doubt:before{
       content:'';
@@ -120,7 +120,7 @@ export default {
       height:20px;
       vertical-align: -4px;
       margin-right:5px;
-      background:url("../../../static/img/doubt.png")
+     // background:url("../../../static/img/doubt.png")
     }
   }
   button{

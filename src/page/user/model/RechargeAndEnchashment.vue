@@ -9,7 +9,9 @@
            </div>
            <p>充值地址</p>
            <p>1DNNSDSDJK7ssdjfkDdasdASDAiasiaAS复制<i>二维码</i>查看<router-link to="financeRecord">充值记录</router-link></p>
+<!--
            <div><img src="../../../../static/img/code.png"></div>
+-->
            <div class="promit">
              <p>温馨提示</p>
              <p>1.请勿向上述地址充值任何非BTC资产，否则资产将不可找回。</p>
