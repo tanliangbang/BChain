@@ -65,9 +65,7 @@
                        <div>
                          <span></span>
                          <div v-if="status === 3" class="finish">
-<!--
                            <img src="../../../../static/img/img_wallet.png">
--->
                             卖家已确认收款,数字货币已入账请查收您的数字货币账户
                          </div>
                        </div>

@@ -88,15 +88,6 @@ export default {
     window.scrollTo(0, 0)
   },
   mounted () {
-    let ws = new window.WebSocket('ws://154.48.249.19:443')
-    ws.onopen = function (e) {}
-    ws.onmessage = function (evt) {
-      let data = null
-      if (evt.data) {
-        data = JSON.parse(evt.data).data
-      }
-      console.log(data)
-    }
   },
   methods: {
     toDetail () {

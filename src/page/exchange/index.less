@@ -40,7 +40,7 @@
       display: flex;
       >div:nth-child(1), >div:nth-child(2){
         width:35%;
-        border-right:1px solid @bg_color;
+        border-right:1px solid @index_bg;
         flex:2;
         >div:nth-child(1) {
           color: #0088ff;
@@ -107,6 +107,16 @@
        span{
          display:inline-block;
          margin-right:20px;
+       }
+     }
+     >table{
+       box-sizing: border-box;
+       img{
+         width:20px;
+         height:20px;
+         border-radius: 50%;
+         margin-right:10px;
+         vertical-align: middle;
        }
      }
    }
@@ -177,7 +187,7 @@
     height:100%;
     color:#fff;
     background-color: #284585;
-    text-align: center;
+    text-align: left;
     th{
       border-bottom:6px solid @bg_color;
     }
@@ -186,6 +196,13 @@
     }
     >tr{
       line-height: 64px;
+      td:nth-child(1),th:nth-child(1) {
+        padding-left:50px;
+      }
+      td:last-child,th:last-child{
+        padding-right:50px;
+        text-align: right;
+      }
     }
   }
 

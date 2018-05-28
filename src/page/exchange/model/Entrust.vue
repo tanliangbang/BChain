@@ -98,6 +98,9 @@ export default {
       border-radius: 8px;
       border: solid 2px #304a87;
       margin-left:5px;
+      padding:30px;
+      color:#fff;
+      font-size:16px;
     }
     p{
       padding-left:99px;

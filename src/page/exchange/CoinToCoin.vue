@@ -3,54 +3,47 @@
     <section>
 
        <div class="coin-nav">
-         <span class="selected">自选</span>
-         <span>BTC</span>
-         <span>ETH</span>
-         <span>USDT</span>
+         <span v-on:click="changeBase('zx')" :class="currSelect==='zx'?'selected':''">自选</span>
+         <span v-on:click="changeBase('btc')" :class="currSelect==='btc'?'selected':''">BTC</span>
+         <span v-on:click="changeBase('eth')" :class="currSelect==='eth'?'selected':''">ETH</span>
+         <span v-on:click="changeBase('usdt')" :class="currSelect==='usdt'?'selected':''">USDT</span>
        </div>
 
       <div class="container">
 
          <div class="coin-list">
            <div class="search">
-             <input type="text" placeholder="输入代币吗">
+             <input type="text" placeholder="搜索币种">
              <button>搜索</button>
            </div>
            <ul>
-             <li v-for="item in [1,2,3,4,5,6,7,8,9]" :key="item">
-               <span>{{item}}</span>
-               <span>BTC/USDT</span>
-               <span class="raise">-1.03%</span>
+             <li v-on:click="changeCoin(item)" v-for="(item, index) in data[currSelect]" :class="currItem.name===item.name?'selected':''" :key="index">
+               <span></span>
+               <span>{{item.name}}({{item.exchange}})</span>
+               <span>{{item.vol}}</span>
              </li>
            </ul>
          </div>
 
         <div class="coin-detail">
            <div class="coin-header">
-             <span>BTC/USDT</span>
-             <span class="fail">+1.08%</span>
+             <span>{{currItem.name}}</span>
+             <span :class= "currItem.exchangeList[0].isUp?'raise':'fail'">{{currItem.exchangeList[0].upAndowm}}</span>
              <span>8804.25 ~ 540891 CNY</span>
            </div>
           <div class="exchange-list">
               <ul>
-                 <li class="selected">
-                    <div>火币</div>
-                    <div>
-                       <p class="raise">+2.19%</p>
-                       <p>81254.55</p>
-                    </div>
-                 </li>
-                <li v-for="item in [1,2,3,4,5,6,7,8,9]" :key="item">
-                  <div>火币</div>
+                <li v-if="currItem.exchangeList" v-for="(item, index) in currItem.exchangeList" :key="index">
+                  <div>{{item.exChangeName}}</div>
                   <div>
-                    <p class="raise">+2.19%</p>
-                    <p>81254.55</p>
+                    <p :class= "item.isUp?'raise':'fail'">{{item.upAndowm}}</p>
+                    <p>{{item.price}}</p>
                   </div>
                 </li>
               </ul>
           </div>
 
-          <KeyLine ref="keyLine"/>
+          <KeyLine ref="keyLine" :coin="currItem"/>
 
           <div class="buy-input-list">
              <div>
@@ -89,6 +82,7 @@
 import KeyLine from './model/KeyLine'
 import CurrEntrustList from './model/CurrEntrustList'
 import Entrust from './model/Entrust'
+import data from './data'
 export default {
   name: 'CoinToCoin',
   components: {
@@ -98,6 +92,24 @@ export default {
   },
   data () {
     return {
+      currSelect: 'btc',
+      data: data,
+      currItem: data['btc'][0]
+    }
+  },
+  created () {
+    let curr = null
+    for (let item in this.data) {
+      for (let i = 0; i < this.data[item].length; i++) {
+        curr = this.data[item][i].exchangeList
+        for (let j = 0; j < curr.length; j++) {
+          if (curr[j].upAndowm.includes('+')) {
+            curr[j].isUp = true
+          } else {
+            curr[j].isUp = false
+          }
+        }
+      }
     }
   },
   mounted () {
@@ -106,6 +118,13 @@ export default {
   methods: {
     containerClick () {
       this.$refs.keyLine.maskShow = true
+    },
+    changeBase (str) {
+      this.currSelect = str
+      this.currItem = this.data[str][0]
+    },
+    changeCoin (item) {
+      this.currItem = item
     }
   }
 }
@@ -151,15 +170,19 @@ export default {
         width:100%;
         height:100%;
         li{
+          cursor: pointer;
           line-height:52px;
           padding:0px 15px;
-          background-image: linear-gradient(0deg, #283b6c 0%, #273965 100%);
           >span:nth-child(2) {
             color:#fff;
           }
           >span:nth-child(3){
             float:right;
+            color: #0aa7ff;
           }
+        }
+        .selected{
+          background: #284585;
         }
       }
     }

@@ -6,6 +6,9 @@
              <div class="nomalInput">
                <input placeholder="输入手机号码"  v-model="registForm.phone" v-on:focus="showDel('phone')" v-on:blur="checkPhone()" type="text"/>
                <i :class="rules.phone.class" v-on:click="delContent('phone')" >{{rules.phone.message}}</i>
+               <div class="userExist" v-if="userExist">
+                 <i>用户已存在</i><router-link to="login">去登入</router-link>
+               </div>
              </div>
              <div class="code">
                <input type="text" v-on:focus="showDel('code')" v-on:blur="checkCode()" v-model="registForm.code" placeholder="输入验证码"/>
@@ -91,6 +94,7 @@ export default {
       phone: null,
       error: false,
       errorMessage: '注册失败',
+      userExist: false,
       registForm: {
         phone: '',
         code: '',
@@ -145,6 +149,10 @@ export default {
           that.phone = that.registForm.phone
           result.gee_token = data.gee_token
           api.sendSMS(result).then(function (res) {
+            if (res.data.code === 10001) {
+              that.userExist = true
+              return
+            }
             if (!res.tokenId) {
               that.$prompt.error('发送失败')
               return
@@ -178,6 +186,7 @@ export default {
       this.email = ''
     },
     checkPhone (bool) {
+      this.userExist = false
       if (this.registForm.phone === '') {
         if (!bool) {
           this.rules.phone.class = 'del'
@@ -311,19 +320,20 @@ export default {
       let that = this
       this.ispass = false
       api.regist(params).then(function (res) {
-        if (res.data.code === 10000 && res.data.ngtoken) {
+        if (res.data.code === 10000 && res.ngtoken) {
           Tool.setCookie('ngtoken', res.ngtoken)
           that.$store.dispatch('setUserInfo', res.userinfo)
           that.$router.push('/')
           that.step = 2
         } else {
           if (res.data.code === 10002) {
-            this.error = true
-            this.errorMessage = '验证码错误'
+            that.error = true
+            that.errorMessage = '验证码错误'
           } else {
-            this.error = true
-            this.errorMessage = '注册失败'
+            that.error = true
+            that.errorMessage = '注册失败'
           }
+
           that.ispass = true
         }
       })
@@ -439,5 +449,17 @@ export default {
   }
   .visiable{
     visibility: hidden;
+  }
+  .userExist{
+    position:absolute;
+    right:30px;
+    top:15px;
+    >i{
+      font-size:12px;
+      margin-right:5px;
+    }
+    >a{
+      color: #39f1ff;
+    }
   }
 </style>

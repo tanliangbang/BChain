@@ -68,6 +68,7 @@ export default {
     async initDate () {
       let data = await api.getGreetest()
       let that = this
+      console.log(data)
       window.initGeetest({
         // 以下配置参数来自服务端 SDK
         gt: data.gt,
@@ -139,6 +140,8 @@ export default {
       }
     },
     login () {
+      /* this.$store.dispatch('setUserInfo', {mobile: '18721675880'})
+      this.$router.push('/') */
       if (this.checkPhone(true) && this.checkPassword(true)) {
         this.ispass = false
         this.captchaObj.verify()

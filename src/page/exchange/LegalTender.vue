@@ -7,21 +7,21 @@
           <div>
              <div>买</div>
              <div>
-                <a v-on:click="changeType(1)" :class="currType===1?'selected':''">BTC</a>
-                <a v-on:click="changeType(2)" :class="currType===2?'selected':''">ETH</a>
-                <a v-on:click="changeType(3)" :class="currType===3?'selected':''">USDT</a>
+                <a v-on:click="changeType('sellbtc')" :class="currType==='sellbtc'?'selected':''">BTC</a>
+                <a v-on:click="changeType('selleth')" :class="currType==='selleth'?'selected':''">ETH</a>
+                <a v-on:click="changeType('sellusdt')" :class="currType==='sellusdt'?'selected':''">USDT</a>
              </div>
           </div>
            <div>
              <div>卖</div>
              <div>
-               <a v-on:click="changeType(4)" :class="currType===4?'selected':''">BTC</a>
-               <a v-on:click="changeType(5)" :class="currType===5?'selected':''">ETH</a>
-               <a v-on:click="changeType(6)" :class="currType===6?'selected':''">USDT</a>
+               <a v-on:click="changeType('buybtc')" :class="currType==='buybtc'?'selected':''">BTC</a>
+               <a v-on:click="changeType('buyeth')" :class="currType==='buyeth'?'selected':''">ETH</a>
+               <a v-on:click="changeType('buyusdt')" :class="currType==='buyusdt'?'selected':''">USDT</a>
              </div>
            </div>
            <div>
-             <div>
+            <!-- <div>
                  <p>支持币种</p>
                  <span>全部</span>
                </div>
@@ -32,27 +32,31 @@
                <div>
                  <p>交易场所</p>
                  <span>全部</span>
-               </div>
+               </div>-->
            </div>
        </header>
        <div class="exList">
          <table border="0" cellpadding="0" cellspacing="0">
            <tr>
-             <th>商家</th>
-             <th>数量</th>
-             <th>限额</th>
-             <th>单价</th>
-             <th>支付方式</th>
-             <th>交易所</th>
-             <th>操作</th>
+             <th width="20%">商家</th>
+             <th width="15%">数量</th>
+             <th width="15%">限额</th>
+             <th width="15%" >单价</th>
+             <th width="15%">支付方式</th>
+             <th width="10%">交易所</th>
+             <th width="10%">操作</th>
            </tr>
-           <tr v-for="item in [0,1,2,3,4,5,6,7,8,9]" :key="item">
-             <td>{{item}}老吴</td>
-             <td>1.3425 BTC</td>
-             <td>1000-5000</td>
-             <td>$50998.89</td>
-             <td>支付宝</td>
-             <td>火币网</td>
+           <tr v-for="(item, index) in data[currType]" :key="index">
+             <td>{{item.userName}}</td>
+             <td>{{item.tradeCount}}</td>
+             <td>{{item.minTradeLimit+"-"+item.maxTradeLimit}}</td>
+             <td>{{item.price}}</td>
+             <td>
+               <img v-if="item.payMethod.split(',')[0]" src="../../../static/img/yhk.png">
+               <img v-if="item.payMethod.split(',')[1]" src="../../../static/img/zfb.png">
+               <img v-if="item.payMethod.split(',')[2]" src="../../../static/img/wx.png">
+             </td>
+             <td>{{item.exchange}}</td>
              <td><a class="showExchagne" v-on:click="makeOrder">去交易</a></td>
            </tr>
          </table>
@@ -152,6 +156,12 @@
 <script>
 import MakeOrder from './model/MakeOrder'
 import OrderInfo from './model/OrderInfo'
+import sellbtc from './../../../static/data/sellbtc'
+import selleth from './../../../static/data/selleth'
+import sellusdt from './../../../static/data/sellusdt'
+import buybtc from './../../../static/data/buybtc'
+import buyeth from './../../../static/data/buyeth'
+import buyusdt from './../../../static/data/buyusdt'
 export default {
   name: 'LegalTender',
   components: {
@@ -160,11 +170,42 @@ export default {
   },
   data () {
     return {
-      currType: 1
+      currType: 'sellbtc',
+      data: {
+        sellbtc: sellbtc.data,
+        selleth: selleth.data,
+        sellusdt: sellusdt.data,
+        buybtc: buybtc.data,
+        buyeth: buyeth.data,
+        buyusdt: buyusdt.data
+      }
     }
   },
   created () {
     window.scrollTo(0, 0)
+    let data = this.data
+    let temp = null
+    let num = 0
+    let changeList = ['火币', 'Bit-Z', 'Cointiger', 'Tokencan', '火币']
+    for (let item in data) {
+      temp = data[item]
+      for (let i = 0; i < temp.length; i++) {
+        num = (temp[i].tradeCount + '').split('.')[1]
+        if (num) {
+          temp[i].tradeCount = temp[i].tradeCount + new Array(7 - num.length).join('0')
+        } else {
+          temp[i].tradeCount = temp[i].tradeCount + '.000000'
+        }
+        num = (temp[i].price + '').split('.')[1]
+        console.log(temp[i].price)
+        if (num) {
+          temp[i].price = num.length === 1 ? temp[i].price + '0' : temp[i].price
+        } else {
+          temp[i].price = temp[i].price + '.00'
+        }
+        temp[i].exchange = changeList[Math.floor(Math.random() * 5)]
+      }
+    }
   },
   methods: {
     makeOrder () {
@@ -173,8 +214,8 @@ export default {
     showOrderInfo () {
       this.$refs.orderInfo.showMakeOrder('enchashment')
     },
-    changeType (num) {
-      this.currType = num
+    changeType (str) {
+      this.currType = str
     }
   }
 }

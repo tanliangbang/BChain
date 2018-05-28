@@ -21,15 +21,15 @@
         </a>
         <div>
            <a v-on:click="changeLang('CN')">中文</a>
-           <a v-on:click="changeLang('EN')">English</a>
+           <a class="gray">English</a>
         </div>
     </div>
-     <ul v-if="this.$store.state.user.userInfo === null">
+     <ul v-if="this.$store.state.user.userInfo !== null">
        <li><router-link to="entrustManage">委托管理</router-link></li>
        <li><router-link to="assetManage">资产管理</router-link></li>
-       <li><router-link to="userCenter">18721675880 <!--{{this.$store.state.user.userInfo.mobile}}--></router-link></li>
+       <li><router-link to="userCenter">{{this.$store.state.user.userInfo.mobile}}</router-link></li>
      </ul>
-    <ul v-if="this.$store.state.user.userInfo !== null">
+    <ul v-if="this.$store.state.user.userInfo === null">
       <li> <router-link to="login">{{ $t("lang.header.dr") }}</router-link></li>
       <li><router-link to="regist">{{ $t("lang.header.zc") }}</router-link></li>
     </ul>
@@ -208,4 +208,8 @@ export default {
       }
     }
 }
+  .gray{
+    color:gray;
+    cursor: text;
+  }
 </style>

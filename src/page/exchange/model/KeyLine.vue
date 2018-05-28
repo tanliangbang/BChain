@@ -13,16 +13,22 @@ export default {
   name: 'KeyLine',
   components: {
   },
+  props:[
+    'coin'
+  ],
   data () {
     return {
       maskShow: true
     }
   },
   mounted () {
-    let symbol = 'eosusdt'
+    // let arr = this.coin.name.split("/");
+    // console.log(arr)
+    // let symbol = (arr[0]+arr[1]).toLowerCase()
+    let _this = this
     var widget = new TradingView.widget({
       fullscreen: true,
-      symbol: symbol,
+      symbol: 'eosusdt',
       interval: '1',
       timezone:'Asia/Shanghai',
       toolbar_bg: '#273c6c',
@@ -93,7 +99,8 @@ export default {
           button.addClass('selected')
         }
         button.parent().addClass("dataSelect")
-        button.append('<span>'+ v +'min</span>')
+
+        button.append('<span>'+ _this.dayChange(v) +'</span>')
         buttonArr.push(button)
         button.on('click', function(a){
           localStorage.setItem('klineTime', v);
@@ -113,6 +120,17 @@ export default {
     hideMask(e) {
       e.stopPropagation()
       this.maskShow = false
+    },
+    dayChange (str) {
+      if (str==='1D') {
+        return '1day'
+      } else if (str==='1W') {
+        return '1week'
+      } else if (str==='1M') {
+        return '1mon'
+      } else {
+        return str + 'min'
+      }
     }
   }
 }
