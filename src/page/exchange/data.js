@@ -188,7 +188,7 @@ let data = {
     },
     {
       name: 'ETC/BTC', // 交易对
-      exchange: 'Bit—Z', // 交易所
+      exchange: 'Bit-Z', // 交易所
       vol: '1099036 万', // 交易量
       price: '96.57 CNY',
       exchangeList: [{
@@ -303,7 +303,7 @@ let data = {
     },
     {
       name: 'ZEC/BTC', // 交易对
-      exchange: 'Token', // 交易所
+      exchange: 'OKex', // 交易所
       vol: '943894 万', // 交易量
       price: '1609.28 CNY',
       exchangeList: [{
@@ -325,118 +325,118 @@ let data = {
       }]
     }],
   eth: [{
-    name: 'BTC/ETH', // 交易对
+    name: 'EOS/ETH', // 交易对
     exchange: 'Tiger', // 交易所
     vol: '941472213 万', // 交易量
-    price: '49084.43 CNY',
+    price: '79.33 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
       upAndowm: '+9.76%', // 涨跌
-      price: '48086.66 CNY' // 价格
+      price: '74.33 CNY' // 价格
     }, {
       exChangeName: 'Tiger', // 交易所名称
       upAndowm: '+2.39%', // 涨跌
-      price: '47034.59 CNY' // 价格
+      price: '75.33 CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
       upAndowm: '+9.89%', // 涨跌
-      price: '49604.66 CNY' // 价格
+      price: '74.33 CNY' // 价格
     }, {
       exChangeName: 'Bittrex', // 交易所名称
       upAndowm: '+3.21%', // 涨跌
-      price: '46073.51 CNY' // 价格
+      price: '78.33 CNY' // 价格
     }]
   },
   {
-    name: 'LTC/ETH', // 交易对
+    name: 'ADA/ETH', // 交易对
     exchange: 'Bit-Z', // 交易所
     vol: '981472213 万', // 交易量
-    price: '2084.43 CNY',
+    price: '66.43 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
       upAndowm: '+9.76%', // 涨跌
-      price: '2024.68 CNY' // 价格
+      price: '65.68 CNY' // 价格
     }, {
       exChangeName: 'Tiger', // 交易所名称
       upAndowm: '-2.39%', // 涨跌
-      price: '2034.79CNY' // 价格
+      price: '66.79CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
       upAndowm: '-2.55%', // 涨跌
-      price: '2104.92 CNY' // 价格
+      price: '64.92 CNY' // 价格
     }, {
       exChangeName: 'Bittrex', // 交易所名称
       upAndowm: '-2.21%', // 涨跌
-      price: '1973.99 CNY' // 价格
+      price: '68.99 CNY' // 价格
     }]
   },
   {
-    name: 'EOS/ETH', // 交易对
+    name: 'STEEM/ETH', // 交易对
     exchange: 'Bit-Z', // 交易所
     vol: '901472213 万', // 交易量
-    price: '84.43 CNY',
+    price: '15.43 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
       upAndowm: '+3.76%', // 涨跌
-      price: '94.55 CNY' // 价格
+      price: '12.55 CNY' // 价格
     }, {
       exChangeName: 'Tiger', // 交易所名称
       upAndowm: '-2.39%', // 涨跌
-      price: '84.08CNY' // 价格
+      price: '14.08CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
       upAndowm: '-2.55%', // 涨跌
-      price: '84.92 CNY' // 价格
+      price: '16.92 CNY' // 价格
     }, {
       exChangeName: 'Bittrex', // 交易所名称
       upAndowm: '-2.21%', // 涨跌
-      price: '83.79 CNY' // 价格
+      price: '12.79 CNY' // 价格
     }]
   },
   {
-    name: 'BCH/ETH', // 交易对
+    name: 'LBA/ETH', // 交易对
     exchange: '火币', // 交易所
     vol: '841472213 万', // 交易量
-    price: '46084.43 CNY',
+    price: '1.43 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
       upAndowm: '+3.76%', // 涨跌
-      price: '49084.21 CNY' // 价格
+      price: '1.21 CNY' // 价格
     }, {
       exChangeName: 'Tiger', // 交易所名称
       upAndowm: '+3.02%', // 涨跌
-      price: '46037.68 CNY' // 价格
+      price: '2.68 CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
       upAndowm: '+1.87%', // 涨跌
-      price: '496059.33 CNY' // 价格
+      price: '2.33 CNY' // 价格
     }, {
       exChangeName: 'OKex', // 交易所名称
       upAndowm: '+3.22%', // 涨跌
-      price: '49072.54 CNY' // 价格
+      price: '2.54 CNY' // 价格
     }]
   },
   {
-    name: 'DASH/ETH', // 交易对
+    name: 'WAN/ETH', // 交易对
     exchange: '火币', // 交易所
     vol: '99972249 万', // 交易量
-    price: '184.95 CNY',
+    price: '26.95 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
       upAndowm: '+2.76%', // 涨跌
-      price: '194.71 CNY' // 价格
+      price: '26.71 CNY' // 价格
     }, {
       exChangeName: 'Tiger', // 交易所名称
       upAndowm: '-2.39%', // 涨跌
-      price: '184.44 CNY' // 价格
+      price: '25.44 CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
       upAndowm: '-2.55%', // 涨跌
-      price: '183.11 CNY' // 价格
+      price: '26.11 CNY' // 价格
     }, {
       exChangeName: 'Bittrex', // 交易所名称
       upAndowm: '-0.21%', // 涨跌
-      price: '189.86 CNY' // 价格
+      price: '27.86 CNY' // 价格
     }]
   },
   {
@@ -463,26 +463,26 @@ let data = {
     }]
   },
   {
-    name: 'ADA/ETH', // 交易对
+    name: 'IOTA/ETH', // 交易对
     exchange: '火币', // 交易所
     vol: '79973582 万', // 交易量
-    price: '2384.57 CNY',
+    price: '9.57 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
       upAndowm: '+4.70%', // 涨跌
-      price: '1994.45 CNY' // 价格
+      price: '9.45 CNY' // 价格
     }, {
       exChangeName: 'Tiger', // 交易所名称
       upAndowm: '-2.39%', // 涨跌
-      price: '2100.69 CNY' // 价格
+      price: '8.99 CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
       upAndowm: '+2.59%', // 涨跌
-      price: '2199.88 CNY' // 价格
+      price: '9.88 CNY' // 价格
     }, {
       exChangeName: 'Bittrex', // 交易所名称
       upAndowm: '-0.21%', // 涨跌
-      price: '2136.66 CNY' // 价格
+      price: '9.66 CNY' // 价格
     }]
   }],
   usdt: [{
@@ -579,7 +579,7 @@ let data = {
   },
   {
     name: 'ETC/USDT', // 交易对
-    exchange: 'Bit—Z', // 交易所
+    exchange: 'Bit-Z', // 交易所
     vol: '41099036 万', // 交易量
     price: '109.32 CNY',
     exchangeList: [{
@@ -592,7 +592,7 @@ let data = {
       price: '97.56 CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
-      upAndowm: '—0.27%', // 涨跌
+      upAndowm: '-0.27%', // 涨跌
       price: '99.89 CNY' // 价格
     }, {
       exChangeName: 'OKex', // 交易所名称
@@ -602,7 +602,7 @@ let data = {
   },
   {
     name: 'ZEC/USDT', // 交易对
-    exchange: 'Token', // 交易所
+    exchange: 'OKex', // 交易所
     vol: '7943214 万', // 交易量
     price: '1609.28 CNY',
     exchangeList: [{

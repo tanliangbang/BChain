@@ -8,25 +8,19 @@
 <script>
 import {datafeed} from '../../../../static/charting_library/datafeeds/myudf/datafeed'
 let  TradingView = require('../../../../static/charting_library/charting_library/charting_library.min.js')
-let Datafeeds = null
 export default {
   name: 'KeyLine',
   components: {
   },
-  props:[
-    'coin'
-  ],
   data () {
     return {
-      maskShow: true
+      maskShow: true,
+      widget: null
     }
   },
   mounted () {
-    // let arr = this.coin.name.split("/");
-    // console.log(arr)
-    // let symbol = (arr[0]+arr[1]).toLowerCase()
     let _this = this
-    var widget = new TradingView.widget({
+    let widget = this.widget = new TradingView.widget({
       fullscreen: true,
       symbol: 'eosusdt',
       interval: '1',
@@ -131,6 +125,13 @@ export default {
       } else {
         return str + 'min'
       }
+    },
+    changeSymbol(str) {
+       let arr = str.name.split("/");
+       let symbol = (arr[0]+arr[1]).toLowerCase()
+       this.widget.chart().setSymbol(symbol, function () {
+
+       })
     }
   }
 }

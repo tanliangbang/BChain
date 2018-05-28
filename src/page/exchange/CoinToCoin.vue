@@ -29,11 +29,13 @@
            <div class="coin-header">
              <span>{{currItem.name}}</span>
              <span :class= "currItem.exchangeList[0].isUp?'raise':'fail'">{{currItem.exchangeList[0].upAndowm}}</span>
+<!--
              <span>8804.25 ~ 540891 CNY</span>
+-->
            </div>
           <div class="exchange-list">
               <ul>
-                <li v-if="currItem.exchangeList" v-for="(item, index) in currItem.exchangeList" :key="index">
+                <li :class="currItem.exchange===item.exChangeName?'selected':''" v-if="currItem.exchangeList" v-for="(item, index) in currItem.exchangeList" :key="index">
                   <div>{{item.exChangeName}}</div>
                   <div>
                     <p :class= "item.isUp?'raise':'fail'">{{item.upAndowm}}</p>
@@ -43,7 +45,7 @@
               </ul>
           </div>
 
-          <KeyLine ref="keyLine" :coin="currItem"/>
+          <KeyLine ref="keyLine"/>
 
           <div class="buy-input-list">
              <div>
@@ -122,9 +124,12 @@ export default {
     changeBase (str) {
       this.currSelect = str
       this.currItem = this.data[str][0]
+      this.$refs.keyLine.changeSymbol(this.currItem)
     },
     changeCoin (item) {
       this.currItem = item
+      console.log(item)
+      this.$refs.keyLine.changeSymbol(item)
     }
   }
 }
