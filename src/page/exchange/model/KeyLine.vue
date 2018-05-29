@@ -12,6 +12,9 @@ export default {
   name: 'KeyLine',
   components: {
   },
+  props: [
+    'coin'
+  ],
   data () {
     return {
       maskShow: true,
@@ -19,10 +22,13 @@ export default {
     }
   },
   mounted () {
+    let arr =this.coin.split("/");
+    let symbol = (arr[0]+arr[1]).toLowerCase()
     let _this = this
+    console.log(symbol)
     let widget = this.widget = new TradingView.widget({
       fullscreen: true,
-      symbol: 'eosusdt',
+      symbol: symbol,
       interval: '1',
       timezone:'Asia/Shanghai',
       toolbar_bg: '#273c6c',
@@ -129,8 +135,8 @@ export default {
     changeSymbol(str) {
        let arr = str.name.split("/");
        let symbol = (arr[0]+arr[1]).toLowerCase()
+       let _this  = this
        this.widget.chart().setSymbol(symbol, function () {
-
        })
     }
   }

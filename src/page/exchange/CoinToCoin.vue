@@ -29,23 +29,23 @@
            <div class="coin-header">
              <span>{{currItem.name}}</span>
              <span :class= "currItem.exchangeList[0].isUp?'raise':'fail'">{{currItem.exchangeList[0].upAndowm}}</span>
-<!--
-             <span>8804.25 ~ 540891 CNY</span>
--->
+             <div>{{currItem.price}}
+               <span v-on:click="changeSort()">价格</span><div v-on:click="changeSort()" :class="sort==='up'?'triangle up':'triangle down'"><span></span><span></span></div>
+             </div>
            </div>
           <div class="exchange-list">
               <ul>
                 <li :class="currItem.exchange===item.exChangeName?'selected':''" v-if="currItem.exchangeList" v-for="(item, index) in currItem.exchangeList" :key="index">
-                  <div>{{item.exChangeName}}</div>
+                  <div> {{item.price}}</div>
                   <div>
-                    <p :class= "item.isUp?'raise':'fail'">{{item.upAndowm}}</p>
-                    <p>{{item.price}}</p>
+                    <span>{{item.exChangeName}}</span>
+                    <span :class= "item.isUp?'raise':'fail'">{{item.upAndowm}}</span>
                   </div>
                 </li>
               </ul>
           </div>
 
-          <KeyLine ref="keyLine"/>
+          <KeyLine ref="keyLine" v-bind:coin="currItem.name"/>
 
           <div class="buy-input-list">
              <div>
@@ -55,12 +55,12 @@
                       <p>总计:1234.565BTC</p>
                    </div>
                    <div>
-                     <p>BTC 可用80.28</p>
-                     <p>BTC 可用80.28</p>
+                     <p>BTC 可用15.8</p>
+                     <p>USDT 可用80.28</p>
                    </div>
                    <div>
-                     <p>充值BTC</p>
-                     <p>充值BTC</p>
+                     <p><router-link to="legalTender">充值BTC</router-link></p>
+                     <p><router-link to="legalTender">充值USDT</router-link></p>
                    </div>
                 </div>
 
@@ -96,7 +96,8 @@ export default {
     return {
       currSelect: 'btc',
       data: data,
-      currItem: data['btc'][0]
+      currItem: data['btc'][0],
+      sort: 'up'
     }
   },
   created () {
@@ -113,6 +114,7 @@ export default {
         }
       }
     }
+    this.priceSort(this.data, this.sort)
   },
   mounted () {
     window.scrollTo(0, 0)
@@ -128,8 +130,60 @@ export default {
     },
     changeCoin (item) {
       this.currItem = item
-      console.log(item)
       this.$refs.keyLine.changeSymbol(item)
+    },
+    changeSort () {
+      this.sort = this.sort === 'up' ? 'down' : 'up'
+      this.priceSort(this.data, this.sort)
+    },
+    priceSort (data, up) {
+      let curr = null
+      let temp = {}
+      for (let item in data) {
+        for (let i = 0; i < data[item].length; i++) {
+          curr = this.data[item][i].exchangeList
+          for (let j = 0; j < curr.length; j++) {
+            for (let k = j + 1; k < curr.length; k++) {
+              if (parseFloat(curr[j].price.split(' ')) > parseFloat(curr[k].price.split(' '))) {
+                if (up === 'up') {
+                  temp.price = curr[k].price
+                  temp.exChangeName = curr[k].exChangeName
+                  temp.isUp = curr[k].isUp
+                  temp.upAndowm = curr[k].upAndowm
+
+                  curr[k].price = curr[j].price
+                  curr[k].exChangeName = curr[j].exChangeName
+                  curr[k].isUp = curr[j].isUp
+                  curr[k].upAndowm = curr[j].upAndowm
+
+                  curr[j].price = temp.price
+                  curr[j].exChangeName = temp.exChangeName
+                  curr[j].isUp = temp.isUp
+                  curr[j].upAndowm = temp.upAndowm
+                }
+              } else {
+                if (up !== 'up') {
+                  temp.price = curr[k].price
+                  temp.exChangeName = curr[k].exChangeName
+                  temp.isUp = curr[k].isUp
+                  temp.upAndowm = curr[k].upAndowm
+
+                  curr[k].price = curr[j].price
+                  curr[k].exChangeName = curr[j].exChangeName
+                  curr[k].isUp = curr[j].isUp
+                  curr[k].upAndowm = curr[j].upAndowm
+
+                  curr[j].price = temp.price
+                  curr[j].exChangeName = temp.exChangeName
+                  curr[j].isUp = temp.isUp
+                  curr[j].upAndowm = temp.upAndowm
+                }
+              }
+            }
+          }
+        }
+      }
+      return data
     }
   }
 }
@@ -208,10 +262,53 @@ export default {
           margin-left:34px;
           font-size:20px;
         }
-        >span:nth-child(3) {
+        >div:nth-child(3) {
           float:right;
           margin-right:95px;
           font-size:18px;
+          >span{
+            margin-left:80px;
+            margin-right:5px;
+            cursor: pointer;
+          }
+          .up{
+            span:nth-child(1)::after{
+              border-bottom: 6px solid #0aa7ff;
+            }
+            span:nth-child(2)::after{
+              border-top: 6px solid rgba(255,255,255,0.3);
+            }
+          }
+          .down{
+            span:nth-child(1)::after{
+              border-bottom: 6px solid rgba(255,255,255,0.3);
+            }
+            span:nth-child(2)::after{
+              border-top: 6px solid #0aa7ff;
+            }
+          }
+          .triangle{
+            display:inline-block;
+            cursor: pointer;
+            span:nth-child(1)::after{
+              content:" ";
+              width: 0;
+              height: 0;
+              position:absolute;
+              top:26px;
+              border-left: 4px solid transparent;
+              border-right: 4px solid transparent;
+            }
+            span:nth-child(2)::after{
+              content:" ";
+              width: 0;
+              height: 0;
+              position:absolute;
+              top:34px;
+              border-left: 4px solid transparent;
+              border-right: 4px solid transparent;
+            }
+          }
         }
       }
       .exchange-list{
@@ -230,26 +327,22 @@ export default {
              background:@bg_color;
              border-radius:3px;
              >div:nth-child(1) {
-               line-height: 120px;
-               padding-left:28px;
+               margin-top:30px;
+               margin-right:23px;
+               font-size: 20px;
+               text-align: right;
              }
              >div:nth-child(2) {
-               p:nth-child(1) {
-                 margin-top:30px;
-                 text-align: right;
-                 padding-right:29px;
-                 font-size: 25px;
+               margin-top:15px;
+               span:nth-child(1) {
+                 margin-left:56px;
+                 font-size: 18px;
                }
-               p:nth-child(2) {
-                 padding-right:29px;
+               span:nth-child(2) {
                  font-size: 16px;
-                 text-align: right;
-                 margin-top:6px;
+                 margin-right:23px;
+                 float:right;
                }
-             }
-             >div{
-               float:left;
-               width:50%;
              }
            }
            li:after{
@@ -332,6 +425,9 @@ export default {
       >div:nth-child(3) {
         text-align: right;
         padding-right:38px;
+        a{
+          color: #39f1ff;
+        }
       }
     }
   }

@@ -7,31 +7,14 @@
       <div>
         <table cellpadding="0" cellspacing="0">
           <tr><th></th><th>价格(USDT)</th><th>数量(BTC)</th><th>累计(BTC)</th></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-         <tr><td>卖10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+         <tr v-for="(item, index) in [1,2,3,4,5,6,7,8,9,10]" :key="index"><td>卖{{item}}</td><td>{{(92.82-0.1*item).toFixed(2)}}</td><td>{{(0.00010+0.00001*item).toFixed(5)}}</td><td>4.5665545</td></tr>
         </table>
       </div>
       <div>
         <table cellpadding="0" cellspacing="0">
           <tr><th></th><th>价格(USDT)</th><th>数量(BTC)</th><th>累计(BTC)</th></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
-          <tr><td>买10</td><td>92.82.88</td><td>0.00010</td><td>4.5665545</td></tr>
+          <tr v-for="(item, index) in [1,2,3,4,5,6,7,8,9,10]" :key="index"><td>买{{item}}</td><td>{{(92.82-0.1*item).toFixed(2)}}</td><td>{{(0.00010+0.00001*item).toFixed(5)}}</td><td>4.5665545</td></tr>
+
         </table>
       </div>
     </div>
@@ -70,6 +53,9 @@ export default {
     >div:nth-child(2) {
       display:flex;
       flex-wrap:wrap-reverse;
+      th{
+        text-align: left;
+      }
       >div:nth-child(1) {
         table{
           tr{

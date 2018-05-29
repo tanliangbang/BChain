@@ -62,7 +62,7 @@ export default {
 <style lang="less" scoped>
 @import "../../../style/var";
 .entrust{
-  margin-top:54px;
+  margin-top:34px;
   width:100%;
   display:flex;
   flex-wrap: wrap-reverse;
@@ -75,7 +75,7 @@ export default {
       line-height: 45px;
     }
     >div:nth-child(2) {
-      height:351px;
+      height:369px;
       background:@bg_color;
     }
   }

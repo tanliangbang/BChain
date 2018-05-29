@@ -27,7 +27,7 @@
         <ul>
           <li>交易账户</li>
           <li class="selected">火币网</li>
-          <li>币安</li>
+          <li>OKex</li>
           <li>Bit-Z</li>
           <li>CoinTiger</li>
         </ul>

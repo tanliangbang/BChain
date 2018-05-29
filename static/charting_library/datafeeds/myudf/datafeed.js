@@ -17,7 +17,6 @@ let datafeed = {
     }
   },
   getMarks (symbolInfo, startDate, endDate, onDataCallback, resolution) {
-    console.log(arguments)
   },
   resolveSymbol: function (symbolName, onSymbolResolvedCallback, onResolveErrorCallback) {
     onSymbolResolvedCallback({
@@ -35,11 +34,10 @@ let datafeed = {
       minmov: 1,
       minmov2: 0,
       pointvalue: 1,
-      pricescale: 100
+      pricescale: 10000
     })
   },
   getBars (symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-    console.log(arguments)
     let date = this.dealDate(resolution)
     console.log(date)
     if (firstDataRequest) {
@@ -56,7 +54,6 @@ let datafeed = {
     }
   },
   subscribeBars (symbolInfo, resolution, onRealtimeCallback, subscriberUID, onResetCacheNeededCallback){
-    console.log(arguments)
   },
   unsubscribeBars (subscriberUID) {
   },

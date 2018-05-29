@@ -350,7 +350,7 @@ let data = {
   {
     name: 'ADA/ETH', // 交易对
     exchange: 'Bit-Z', // 交易所
-    vol: '981472213 万', // 交易量
+    vol: '921472213 万', // 交易量
     price: '66.43 CNY',
     exchangeList: [{
       exChangeName: '火币', // 交易所名称
@@ -365,7 +365,7 @@ let data = {
       upAndowm: '-2.55%', // 涨跌
       price: '64.92 CNY' // 价格
     }, {
-      exChangeName: 'Bittrex', // 交易所名称
+      exChangeName: 'OKex', // 交易所名称
       upAndowm: '-2.21%', // 涨跌
       price: '68.99 CNY' // 价格
     }]
@@ -500,7 +500,7 @@ let data = {
       price: '496090.56 CNY' // 价格
     }, {
       exChangeName: 'Bit-Z', // 交易所名称
-      upAndowm: '+2，08%', // 涨跌
+      upAndowm: '+2.08%', // 涨跌
       price: '486060.34 CNY' // 价格
     }, {
       exChangeName: 'OKex', // 交易所名称

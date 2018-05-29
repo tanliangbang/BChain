@@ -3,50 +3,34 @@
      <table>
         <thead>
           <tr>
-            <td>我们的服务</td>
-            <td>我们的服务</td>
-            <td>我们的服务</td>
-            <td>我们的服务</td>
-            <td>我们的服务</td>
-            <td>我们的服务</td>
+            <td>工具</td>
+            <td>关于</td>
+            <td>条款说明 </td>
           </tr>
         </thead>
        <tbody>
          <tr>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
+           <td>数字资产介绍</td>
+           <td>关于比链  </td>
+           <td>用户协议 </td>
          </tr>
          <tr>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
+           <td>客户端下载</td>
+           <td>联系我们  </td>
+           <td>隐私条款 </td>
          </tr>
          <tr>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
+           <td>API文档</td>
+           <td>加入我们  </td>
+           <td>法律声明 </td>
          </tr>
          <tr>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
-           <td>我们的信息</td>
+           <td>帮助中心</td>
          </tr>
+
        </tbody>
      </table>
-     <div>Copyright 2018 ShangHai Municipal Educational Examinations Authority All Rights Resered</div>
+     <div>©2018 BILIAN</div>
   </div>
 </template>
 
@@ -75,7 +59,9 @@ export default {
        padding:50px 0px;
        color:#fff;
        margin:0px auto;
-       thead{
+       text-align: center;
+
+      thead{
          font-size:14px;
        }
        tbody{

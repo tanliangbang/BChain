@@ -2,7 +2,9 @@
   <div class="index">
      <section>
         <div>
-          <div></div>
+          <div>
+            <Banner/>
+          </div>
         </div>
         <div>
            <img src="../../static/img/bg_shujutu.png">
@@ -32,7 +34,9 @@
     <section>
       <div class="header">
          <span :class="currBaseCoin==='usdt'?'selected':''" v-on:click="toChange('usdt')">所有</span>
+<!--
          <span>自选</span>
+-->
         {{currBaseCoin}}
       </div>
       <div>
@@ -54,7 +58,7 @@
                   <td>{{item.quotes.USD["volume_24h"]}}</td>
                   <td>{{item["circulating_supply"]}} {{item["symbol"]}}</td>
                   <td :class="item.quotes.USD['percent_change_24h']>0?'raise':'fail'">
-                    {{item.quotes.USD["percent_change_24h"]+"%"}}
+                    {{item.quotes.USD["percent_change_24h"]>0?'+'+item.quotes.USD["percent_change_24h"]+"%":item.quotes.USD["percent_change_24h"] +"%"}}
                   </td>
                   <td><div>0.0000033599</div><div>+0.25%</div></td>
                   <td><div>0.0000033599</div><div>+0.25%</div></td>
@@ -71,10 +75,11 @@
 <script>
 import Tool from '../utils/Tool'
 import * as api from '../service/getData'
-
+import Banner from '../plugins/banner/Banner'
 export default {
   name: 'Index',
   components: {
+    Banner
   },
   data () {
     return {
