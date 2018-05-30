@@ -58,7 +58,7 @@ export default {
       // this.$refs.mainContainer.style.transform = 'translate(0px,' + (-260 * index) + 'px)'
       if (!this.$refs.mainContainer) {
         clearInterval(this.interval)
-         return
+        return
       }
       this.$refs.mainContainer.style.marginTop = (-260 * index) + 'px'
     }

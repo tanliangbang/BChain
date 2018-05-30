@@ -36,3 +36,8 @@ export const getUserInfo = (params) => http.get(base + '/user/current', params)
  * 绑定邮箱
  */
 export const bindEmail = (params) => http.post(base + '/tokens/email/bind', params)
+
+/**
+ * 退出登入
+ */
+export const loginOut = (params) => http.delete(base + '/tokens/current', params)

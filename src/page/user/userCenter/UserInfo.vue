@@ -13,6 +13,11 @@
       <span>修改</span>
     </div>
 
+    <div class="nomal">
+      <span>退出登入</span>
+      <span v-on:click="loginOut">退出</span>
+    </div>
+
     <div class="login-history">
       <div class="title">登入历史</div>
       <table>
@@ -32,6 +37,8 @@
 </template>
 
 <script>
+import * as api from './../../../service/getData'
+import Tool from './../../../utils/Tool'
 export default {
   name: 'Auther',
   components: {
@@ -44,6 +51,17 @@ export default {
     window.scrollTo(0, 0)
   },
   methods: {
+    loginOut () {
+      let _this = this
+      this.$mask.showAlert('确定要退出？', 'doubt', async function () {
+        let data = await api.loginOut()
+        if (data.data.code === 10000) {
+          Tool.delCookie('ngtoken')
+          _this.$store.dispatch('setUserInfo', null)
+          _this.$router.push('/')
+        }
+      })
+    }
   }
 }
 </script>
@@ -67,6 +85,7 @@ export default {
       margin-right:25px;
       line-height:56px;
       float:right;
+      cursor: pointer;
     }
     .grayColor{
       color: #5a78bf;

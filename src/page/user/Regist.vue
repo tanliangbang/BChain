@@ -36,15 +36,25 @@
               <a v-on:click="submit"  class="ok_button">下一步</a>
             </div>
           </form>
-          <form class="step2" v-if="step === 2" v-on:keyup="emailPassDown">
+          <form class="step2" v-if="step === 2" >
              <p>
                恭喜,注册成功~ <br/>
                恭交易操作需要完成邮箱验证,请完成邮箱验证
              </p>
-            <div class="nomalInput">
-              <input placeholder="请输入邮箱"  v-model="email" v-on:focus="showDel('email')" v-on:blur="checkEmail()" type="text"/>
-              <i :class="rules.email.class" v-on:click="delEmail()" >{{rules.email.message}}</i>
+            <div class="code">
+              <input type="text" v-on:focus="showDel('code')" v-on:blur="checkCode()" v-model="registForm.code" placeholder="输入验邮箱"/>
+              <i :class="rules.code.class"  v-on:click="delContent('code')">{{rules.code.message}}</i>
+              <span v-on:click="getCode()" ref="send">获取验证码</span>
             </div>
+            <div class="codeInput">
+              <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="请"  type="text"/>
+              <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="输" type="text"/>
+              <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="入" type="text"/>
+              <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="验" type="text"/>
+              <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="证" type="text"/>
+              <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="码"  type="text"/>
+            </div>
+
             <div v-if="!emailpass" class="sbutton">
                <a class="no_button">发送邮箱</a>
             </div>
@@ -53,19 +63,6 @@
             </div>
             <div class="login_button">
               <router-link class="border_button" to="login">返回首页</router-link>
-            </div>
-          </form>
-          <form class="step3" v-if="step === 3">
-            <p>
-              恭喜,注册成功~ <br/>
-              恭交易操作需要完成邮箱验证,请完成邮箱验证
-            </p>
-            <p>已发送 {{email}} </p>
-            <div  class="to_button">
-              <a v-on:click="loginEmail" class="ok_button">登入邮箱</a>
-            </div>
-            <div class="login_button">
-              <router-link class="border_button" to="/">返回首页</router-link>
             </div>
           </form>
       </div>
@@ -85,7 +82,7 @@ export default {
     return {
       isShowpass: false,
       ispass: false,
-      step: 1,
+      step: 2,
       emailpass: false,
       email: '',
       isSendCode: false,
@@ -354,6 +351,22 @@ export default {
         this.captchaObj.verify()
       }
     },
+    codeKeyup () {
+      let val = event.target.value
+      let regPos = /^\d+(\.\d+)?$/
+      if (regPos.test(val)) {
+        if (event.target.nextElementSibling) {
+          event.target.nextElementSibling.focus()
+        } else {
+          event.target.blur()
+        }
+      } else {
+        event.target.value = ''
+      }
+    },
+    clearVal () {
+      event.target.value = ''
+    },
     loginEmail () {
       let email = this.email
       let pre = email.split('@')[1]
@@ -391,6 +404,7 @@ export default {
 <style lang="less" scoped>
   @import '../../style/common';
   @import './index';
+  @import './../../style/form.less';
   .step1{
       padding-top:110px;
       p{

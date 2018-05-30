@@ -37,7 +37,7 @@ export default {
       method: 'post',
       url,
       data: qs.stringify(data),
-      timeout: 30000,
+      timeout: 15000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -49,7 +49,7 @@ export default {
       method: 'get',
       url,
       params,
-      timeout: 30000,
+      timeout: 15000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       }
@@ -61,8 +61,20 @@ export default {
       method: 'post',
       url,
       data: data,
-      timeout: 30000,
+      timeout: 15000,
       headers: headers
+    }).then(checkStatus).then(checkCode)
+  },
+  delete (url, data) {
+    return axios({
+      method: 'delete',
+      url,
+      data: qs.stringify(data),
+      timeout: 15000,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
     }).then(checkStatus).then(checkCode)
   }
 }

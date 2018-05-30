@@ -128,7 +128,14 @@ Tool.getCookie = function (name) {
   }
   return false
 }
-
+Tool.delCookie = function (name) {
+  var exp = new Date()
+  exp.setTime(exp.getTime() - 1)
+  var cval = Tool.getCookie(name)
+  if (cval !== null) {
+    document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString()
+  }
+}
 Tool.isLogin = function () {
   if (Tool.getCookie('ngtoken')) {
     return true
