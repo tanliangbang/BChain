@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import {datafeed} from '../../../../static/charting_library/datafeeds/myudf/datafeed'
-let  TradingView = require('../../../../static/charting_library/charting_library/charting_library.min.js')
+import {datafeed} from 'static/charting_library/datafeeds/myudf/datafeed'
+let  TradingView = require('static/charting_library/charting_library/charting_library.min.js')
 export default {
   name: 'KeyLine',
   components: {

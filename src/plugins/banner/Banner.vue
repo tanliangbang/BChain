@@ -1,16 +1,16 @@
 <template>
   <div class="banner">
       <div ref="mainContainer">
-        <div v-bind:style="{ background:'url(../../../static/img/banner1.png) no-repeat center center'}"></div>
-        <div v-bind:style="{ background:'url(../../../static/img/banner2.png) no-repeat center center'}"></div>
-        <div v-bind:style="{ background:'url(../../../static/img/banner3.png) no-repeat center center'}"></div>
-        <div v-bind:style="{ background:'url(../../../static/img/banner4.png) no-repeat center center'}"></div>
+        <div v-bind:style="{ background:'url(static/img/banner1.png) no-repeat center center'}"></div>
+        <div v-bind:style="{ background:'url(static/img/banner2.png) no-repeat center center'}"></div>
+        <div v-bind:style="{ background:'url(static/img/banner3.png) no-repeat center center'}"></div>
+        <div v-bind:style="{ background:'url(static/img/banner4.png) no-repeat center center'}"></div>
       </div>
       <ul>
-        <li v-on:click="changeImg(0)" :class="index===0?'selected':'unselected'"><img src="../../../static/img/b1.png" /></li>
-        <li v-on:click="changeImg(1)" :class="index===1?'selected':'unselected'"><img src="../../../static/img/b2.png" /></li>
-        <li v-on:click="changeImg(2)" :class="index===2?'selected':'unselected'"><img src="../../../static/img/b3.png" /></li>
-        <li v-on:click="changeImg(3)" :class="index===3?'selected':'unselected'"><img src="../../../static/img/b4.png" /></li>
+        <li v-on:click="changeImg(0)" :class="index===0?'selected':'unselected'"><img src="static/img/b1.png" /></li>
+        <li v-on:click="changeImg(1)" :class="index===1?'selected':'unselected'"><img src="static/img/b2.png" /></li>
+        <li v-on:click="changeImg(2)" :class="index===2?'selected':'unselected'"><img src="static/img/b3.png" /></li>
+        <li v-on:click="changeImg(3)" :class="index===3?'selected':'unselected'"><img src="static/img/b4.png" /></li>
       </ul>
   </div>
 </template>

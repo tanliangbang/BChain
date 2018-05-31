@@ -7,7 +7,7 @@
           </div>
         </div>
         <div>
-           <img src="../../static/img/bg_shujutu.png">
+           <img src="static/img/bg_shujutu.png">
           <div>
             <p>当前资产</p>
             <p>2.324 BTC</p>

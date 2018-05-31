@@ -35,7 +35,7 @@ export const getUserInfo = (params) => http.get(base + '/user/current', params)
 /**
  * 绑定邮箱
  */
-export const bindEmail = (params) => http.post(base + '/tokens/email/bind', params)
+export const getEmailCode = (params) => http.post(base + '/emails/code', params)
 
 /**
  * 退出登入

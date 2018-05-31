@@ -42,9 +42,9 @@
                恭交易操作需要完成邮箱验证,请完成邮箱验证
              </p>
             <div class="code">
-              <input type="text" v-on:focus="showDel('code')" v-on:blur="checkCode()" v-model="registForm.code" placeholder="输入验邮箱"/>
-              <i :class="rules.code.class"  v-on:click="delContent('code')">{{rules.code.message}}</i>
-              <span v-on:click="getCode()" ref="send">获取验证码</span>
+              <input type="text" v-on:focus="showDel('email')" v-on:blur="checkEmail()" v-model="email" placeholder="请输入邮箱"/>
+              <i :class="rules.email.class"  v-on:click="delEmail('email')">{{rules.email.message}}</i>
+              <span v-on:click="getEmailCode()" ref="sendEmail">获取验证码</span>
             </div>
             <div class="codeInput">
               <input v-on:keyup="codeKeyup()" v-on:focus="clearVal" placeholder="请"  type="text"/>
@@ -59,7 +59,7 @@
                <a class="no_button">发送邮箱</a>
             </div>
             <div v-if="emailpass" class="sbutton">
-              <a class="ok_button" v-on:click="sendEmail">发送邮箱</a>
+              <a class="ok_button" >发送邮箱</a>
             </div>
             <div class="login_button">
               <router-link class="border_button" to="login">返回首页</router-link>
@@ -335,15 +335,25 @@ export default {
         }
       })
     },
-    sendEmail () {
+    getEmailCode () {
       let _this = this
       this.emailpass = false
-      api.bindEmail({email: this.email}).then(function (res) {
-        if (res.status) {
-          _this.step = 3
-        } else {
-          this.emailpass = true
-        }
+      if (!this.checkEmail(true)) {
+        return
+      }
+      api.getEmailCode({email: this.email}).then(function (res) {
+        let currNode = _this.$refs.sendEmail
+        let number = 60
+        currNode.innerHTML = '发送(' + number + 's)'
+        let cuntDown = setInterval(function () {
+          if (number <= 0) {
+            currNode.innerHTML = '获取验证码'
+            clearInterval(cuntDown)
+          } else {
+            number = --number
+            currNode.innerHTML = '已发送(' + number + 's)'
+          }
+        }, 1000)
       })
     },
     getCode () {
@@ -433,7 +443,7 @@ export default {
     }
   }
   .step2, .step3{
-    padding-top:167px;
+    padding-top:100px;
     >p:nth-child(1){
       text-align: center;
       font-size: 20px;

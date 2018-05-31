@@ -18,7 +18,7 @@
            </div>
            <ul>
              <li v-on:click="changeCoin(item)" v-for="(item, index) in data[currSelect]" :class="currItem.name===item.name?'selected':''" :key="index">
-               <span></span>
+               <span><img src="./../../../static/img/collectioned.png"/></span>
                <span>{{item.name}}({{item.exchange}})</span>
                <span>{{item.vol}}</span>
              </li>
